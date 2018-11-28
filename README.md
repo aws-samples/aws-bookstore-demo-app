@@ -544,7 +544,7 @@ customerId: string
 &nbsp;
 
 **Other Lambda functions**
-There are a couple other Lambda functions used to make the AWS Bookstore Demo App work, and they are listed here:
+There are a few other Lambda functions used to make the AWS Bookstore Demo App work, and they are listed here:
 
 1. SearchES - Lambda function that returns a list of books based on provided search parameters in the request.
 2. DDBStreaming - Lambda function that updates the ElasticSearch cluster when new books are added to the store.
@@ -627,9 +627,9 @@ Amazon CloudFront hosts the web application frontend that users interface with. 
 
 &nbsp;
 
-### Amazon Route53 and Amazon VPC
+### Amazon VPC
 
-ElastiCache for Redis and Neptune are contained inside of a VPC (Virtual Private Cloud).
+Amazon VPC (Virtual Private Cloud) is used with Amazon Elasticsearch Service, Amazon ElastiCache for Redis, and Amazon Neptune.
 
 &nbsp;
 
