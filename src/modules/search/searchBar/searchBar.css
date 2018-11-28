@@ -1,0 +1,53 @@
+.search-padding {
+  padding-left: 25px !important;
+  padding-right: 1rem;
+}
+
+.title-padding {
+	padding: 5px 0 5px 0px;
+	margin: 0;
+  text-align: center;
+}
+
+.no-radius {
+	border-radius: 0 !important;
+}
+
+.no-margin {
+  margin: 0 24px 0 0 !important;
+}
+
+.mainsearch {
+	background-color:#4A4A4A;
+	padding: 10px 0 10px 10px;
+}
+
+.btn-orange {
+	background-color:#F69827;
+}
+
+.no-margin-top {
+  margin-top: 0px !important;
+}
+
+/*test color*/
+
+.orange {
+  color: #F69827;
+}
+
+.white {
+  color: #FFFFFF;
+}
+
+.addon-black {
+  color: #FFFFFF !important;
+  background-color:#000 !important;
+  border: #000 !important;
+  font-weight: 200 !important;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+background-color: transparent !important;
+}
+

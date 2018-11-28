@@ -1,0 +1,45 @@
+.friend-images {
+  width: 12rem;
+  height: auto;
+}
+
+.product-thumb {
+  height: 168px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.friend-thumb {
+  height: 5rem;
+}
+
+.white-box {
+  display: block;
+  padding: 4px;
+  margin: 20px 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  padding:20px;
+}
+
+.margin-1 {
+  margin: 1rem;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-padding{
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+.product-padding{
+  padding: 20px !important;
+}
+
+.product-price h4{
+  font-weight: 300 !important;
+}

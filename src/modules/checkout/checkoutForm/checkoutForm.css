@@ -1,0 +1,13 @@
+.checkout {
+  width: 400px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ccv {
+  width: 150px;
+}

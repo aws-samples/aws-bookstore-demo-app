@@ -1,0 +1,59 @@
+.App {
+  margin-top: 15px;
+}
+
+.App .navbar-brand {
+  font-weight: bold;
+}
+
+.App .orange {
+  color: #F69827;
+}
+
+.App .white {
+  color: #fff;
+}
+
+.shopping-icon-container{
+	background-color: #F69827;
+	padding: 2px 12px 0 12px;
+	border-radius: 14px;
+	margin-right: -24px;
+}
+
+.shopping-icon-container .count{
+	margin: 0 0 0 4px;
+}
+
+.line-height-24{
+	line-height: 24px;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .active > a:active{
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow:inset 0 0px 0px rgba(0, 0, 0, .00) !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .active > a:focus{
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow:inset 0 0px 0px rgba(0, 0, 0, .00) !important;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .active > a:focus-within{
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow:inset 0 0px 0px rgba(0, 0, 0, .00) !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .active > a:visited{
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow:inset 0 0px 0px rgba(0, 0, 0, .00) !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .active > a {  
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow:inset 0 0px 0px rgba(0, 0, 0, .00) !important;
+}

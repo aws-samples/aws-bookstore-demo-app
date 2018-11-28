@@ -1,0 +1,13 @@
+.glyphicon-star {
+	color: #FFD502;
+	-webkit-text-fill-color: #FFD502; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #aaa;
+}
+
+.glyphicon-star-empty {
+	color: #aaa;
+  -webkit-text-fill-color: #aaa; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #aaa;
+}

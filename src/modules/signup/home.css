@@ -1,0 +1,118 @@
+.Home .lander {
+  padding: 80px 0;
+  text-align: left;
+}
+
+.container-category img{
+  width: 100%;
+  cursor: pointer;
+}
+
+.Home .product-section{
+  padding: 30px 0;
+}
+
+.Home .product-section h2{
+  padding: 10px 0;
+  font-family: AmazonEmber,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+.Home .lander h1 {
+  font-size:52px;
+  text-align: center;
+  font-family: AmazonEmber,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+}
+
+.ad-container-padding{
+  padding: 0 8px 14px 8px !important;
+}
+
+.ad-padding{ 
+  padding: 0 7px !important;
+}
+
+.Home .lander p {
+  color: #555;
+  font-size:18px;
+  line-height: 28px;
+  padding: 40px 15px;
+  font-size: 1.28em;
+  font-weight: 200;
+  line-height: 1.6em;
+}
+
+.Home a {
+  font-size:18px;
+  line-height: 28px;
+  font-weight: 200;
+  line-height: 1.6em;
+}
+
+.Home .product-section p{
+  padding: 10px 0;
+}
+
+.Home .notes h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  overflow: hidden;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Home .notes p {
+  color: #666;
+}
+
+.Home h3 a {
+  color: #005b86;
+  font-size: 1.2em;
+}
+
+.Home h3 {
+  color: #005b86;
+  font-weight: 300;
+  padding: 0px 0px;
+}
+
+.Home h4 {
+  font-weight: 500;
+  padding: 0px 0px;
+}
+
+.Home .button-container{
+  text-align: center;
+  padding: 0px 0 60px 0;
+}
+
+.Home .button-container a{
+  padding: 10px 20px;
+  background-color: #F69827;
+  border: 0;
+  color:#fff;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.navbar-default{
+  border: 0px !important;
+  background: transparent !important;
+  box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0), 0 1px 5px rgba(0, 0, 0, 0) !important;
+  -webkit-box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0), 0 1px 5px rgba(0, 0, 0, 0) !important;
+  margin: 0 !important;
+}
+
+.spinning.glyphicon {
+  margin-right: 7px;
+  top: 2px;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
