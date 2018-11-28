@@ -94,6 +94,10 @@ To get the AWS Bookstore Demo App up and running in your own AWS account, follow
 
 &nbsp;
 
+*Advanced: If you want to maintain low latency for your app, [this deeplink](https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack-with-lambda-triggers.template) will create an identical stack as the one in #2 above, but with additional triggers to keep the Lamdba functions "warm."  For more information, check out the [Considerations for demo purposes](#considerations) section.*
+
+&nbsp;
+
 ### Cleaning up
 
 To tear down your application and remove all resources associated with the AWS Bookstore Demo App, follow these steps:
@@ -661,6 +665,8 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 
 5. Checkout is a simplified demo experience that customers can take and implement a real-world payment processing platform.  Similarly, the *View Receipt* button after purchase is non-functional, meant to demonstrate how you can add on to the app.
 
+6. The CloudFormation template referenced in #2 of the [Getting started](#getting-started) section is everything you need to create the full-stack application.  However, when the application is newly created, or hasn't been used in some time, it may take a few extra seconds to run the Lamdba functions, which increases the latency of operations like search and listing books.  If you want to maintain low latency for your app, [this deeplink](https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack-with-lambda-triggers.template) creates an identical stack but with additional triggers to keep the Lamdba functions "warm" (by running them every 10 minutes).  Given that these triggers make the Lamdba functions run more frequently (on a schedule), this will add a small amount to the overall cost to run the application.  The benefit is a more responsive application even when the Lamdba functions are not being regularly called by user activity.
+
 &nbsp;
 
 ---
@@ -671,7 +677,7 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 
 * The application was written for demonstration purposes and not for production use.
 * Orders are backed by DynamoDB, but no mechanism exists to recreate the table in the unlikely scenario of a Redis failure.
-* Upon the first use of a Lambda function, cold start times in a VPC can be slow. Once the Lambda function has been warmed up, performance will improve.
+* Upon the first use of a Lambda function, cold start times in a VPC can be slow. Once the Lambda function has been warmed up, performance will improve.  See #6 in [Considerations for demo purposes](#considerations) for more information.
 * The application is not currently designed for for high availability. You can increase the availability of the application by configuring the Amazon Elasticsearch, Amazon Neptune, and Amazon ElastiCache clusters with multiple instances across multiple AZs.
 * The application enables multiple users to sign into the application but the social graph is single user. As a result, different users will see the same social graph. Further, when new books are purchased, that state is not reflected in the social graph.
 * There are some network errors observed on Firefox.  We are looking into this.
