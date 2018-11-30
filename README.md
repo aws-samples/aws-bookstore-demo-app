@@ -80,7 +80,7 @@ You can choose to customize the template to create your own bookstore, modify it
 To get the AWS Bookstore Demo App up and running in your own AWS account, follow these steps (if you do not have an AWS account, please see [How do I create and activate a new Amazon Web Services account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)):
 
 1. Log into the [AWS console](https://console.aws.amazon.com/) if you are not already
-2. Use [this deeplink](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=MyBookstore&templateURL=https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack.template) to open the AWS CloudFormation console and create a new stack
+2. Use [this deeplink](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=MyBookstore&templateURL=https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack.template) to open the AWS CloudFormation console and create a new stack. 
 3. Continue through the CloudFormation wizard steps
     1. Name your stack, i.e. MyBookstore
     2. Name your S3 bucket (must be lowercase and has to unique across all existing bucket names in Amazon S3).  See [bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev//BucketRestrictions.html#bucketnamingrules).
@@ -94,7 +94,7 @@ To get the AWS Bookstore Demo App up and running in your own AWS account, follow
 
 &nbsp;
 
-*Advanced: If you want to maintain low latency for your app, [this deeplink](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=MyBookstore&templateURL=https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack-with-lambda-triggers.template) will create an identical stack as the one in #2 above, but with additional triggers to keep the Lamdba functions "warm."  For more information, see the [Considerations for demo purposes](#considerations-for-demo-purposes) section.*
+*Advanced: The source CloudFormation template is available [here](https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack.template). If you want to maintain low latency for your app, [this deeplink](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=MyBookstore&templateURL=https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack-with-lambda-triggers.template) will create an identical stack, but with additional triggers to keep the Lamdba functions "warm" (CloudFormation template [here](https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack-with-lambda-triggers.template)).  For more information, see the [Considerations for demo purposes](#considerations-for-demo-purposes) section.*
 
 &nbsp;
 
