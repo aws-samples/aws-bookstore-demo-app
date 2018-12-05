@@ -81,7 +81,6 @@ To get the AWS Bookstore Demo App up and running in your own AWS account, follow
 
 1. Log into the [AWS console](https://console.aws.amazon.com/) if you are not already
 2. Choose **Launch Stack**  to open the AWS CloudFormation console and create a new stack.  
-&nbsp;
 [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=MyBookstore&templateURL=https://s3.amazonaws.com/aws-bookstore-demo/master-fullstack.template)
 3. Continue through the CloudFormation wizard steps
     1. Name your stack, i.e. MyBookstore
@@ -262,7 +261,7 @@ GET /search (SearchES)
 
 ### AWS Lambda
 
-AWS Lambda is used in a few different places to run the application, as shown in the architecture diagram.  The important Lambda functions that are deployed as part of the template are shown here.  In the cases where the response fields are blank, the application will return a statusCode 200 or 500 for success or failure, respectively.
+AWS Lambda is used in a few different places to run the application, as shown in the architecture diagram.  The important Lambda functions that are deployed as part of the template are shown below, and available in the [functions](/functions) folder.  In the cases where the response fields are blank, the application will return a statusCode 200 or 500 for success or failure, respectively.
 
 &nbsp;
 
@@ -552,9 +551,9 @@ customerId: string
 **Other Lambda functions**
 There are a few other Lambda functions used to make the AWS Bookstore Demo App work, and they are listed here:
 
-1. SearchES - Lambda function that returns a list of books based on provided search parameters in the request.
-2. DDBStreaming - Lambda function that updates the ElasticSearch cluster when new books are added to the store.
-3. RedisStreaming - Updates Leaderboard via the ElastiCache for Redis cluster as orders are placed.
+1. Search - Lambda function that returns a list of books based on provided search parameters in the request.
+2. updateSearchCluster - Lambda function that updates the ElasticSearch cluster when new books are added to the store.
+3. updateBestsellers - Updates Leaderboard via the ElastiCache for Redis cluster as orders are placed.
 
 &nbsp;
 
