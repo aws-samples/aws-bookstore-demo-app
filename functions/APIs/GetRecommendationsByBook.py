@@ -16,7 +16,7 @@ import json
 
 myNeptuneEndpoint = 'ws://' + os.environ['neptunedb'] +':8182/gremlin' # Neptune cluster url
 
-# GetRecsByBookId - Get list of friends who have purchased this book and how many times it was purchased by those friends
+# GetRecommendationsByBook - Get list of friends who have purchased this book and how many times it was purchased by those friends
 def lambda_handler(event, context):
 
     graph = Graph()
