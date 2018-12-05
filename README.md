@@ -233,7 +233,7 @@ GET /books/{:id} (GetBook)
 
 **Cart (DynamoDB)**
 
-GET /cart (ListOrdersInCart)  
+GET /cart (ListItemsInCart)  
 POST /cart (AddToCart)  
 PUT /cart (UpdateCart)  
 DELETE /cart (RemoveFromCart)  
@@ -319,17 +319,17 @@ GetBookResponse {
 
 &nbsp;
 
-**ListOrdersInCart**
+**ListItemsInCart**
 Lambda function that lists the orders a user has placed.
 
 ```js
-ListOrdersInCartRequest {
+ListItemsInCartRequest {
 
 }
 ```
 
 ```js
-ListOrdersInCartResponse {
+ListItemsInCartResponse {
     orders[]
 }
 ```
@@ -592,7 +592,7 @@ dynamodb:Query - table/Books
 AWSLambdaBasicExecutionRole  
 dynamodb:GetItem - table/Books
 
-**ListOrdersInCartLambda**
+**ListItemsInCartLambda**
 AWSLambdaBasicExecutionRole  
 dynamodb:Query - table/Cart
 
