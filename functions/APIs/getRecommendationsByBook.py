@@ -14,17 +14,17 @@ from gremlin_python.driver.driver_remote_connection import DriverRemoteConnectio
 import os
 import json
 
-myNeptuneEndpoint = "ws://" + os.environ["neptunedb"] + ":8182/gremlin" # Neptune cluster URL
+myNeptuneEndpoint = "ws://" + os.environ["neptunedb"] + ":8182/gremlin" # Neptune cluster url
 
-# GetRecommendations - Get list of recommended books based on the purchase history of a user's friends
+# GetRecommendationsByBook - Get list of friends who have purchased this book and how many times it was purchased by those friends
 def handler(event, context):
     
     graph = Graph()
     
     g = graph.traversal().withRemote(DriverRemoteConnection(myNeptuneEndpoint,"g"))
     
-    toReturn = g.V().hasLabel("book").where(inE("purchased").count().is_(P.gt(0))).project("bookId","purchases","friendsPurchased") \
-        .by(id()).by(inE("purchased").count()).by(in_().id().fold()).order().by(select("purchases"),Order.decr).limit(5).toList()
+    toReturn = g.V(event["pathParameters"]["bookId"]).project("friendsPurchased","purchased") \
+        .by(in_("purchased").dedup().where(id().is_(P.neq(event["pathParameters"]["bookId"]))).id().fold()).by(in_("purchased").count()).toList()
     
     response = {
         "statusCode": 200,
