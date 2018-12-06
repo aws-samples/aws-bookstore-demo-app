@@ -358,10 +358,7 @@ AddToCartRequest {
 
 ```js
 AddToCartResponse {
-    customerId: string
-    bookId: string
-    quantity: number
-    price: number
+
 }
 ```
 
@@ -378,8 +375,7 @@ RemoveFromCartRequest {
 
 ```js
 RemoveFromCartResponse {
-    customerId: string
-    bookId: string
+
 }
 ```
 
