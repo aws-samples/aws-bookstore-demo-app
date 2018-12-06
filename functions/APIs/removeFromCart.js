@@ -6,6 +6,13 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // RemoveFromCart - Remove a particular book from a customer's cart
 exports.handler = (event, context, callback) => {
+  
+  // Return immediately if being called by warmer 
+  if (event.source === "warmer") {
+    return callback(null, "Lambda is warm");
+  }
+
+  // Request body is passed in as a JSON encoded string in 'event.body'
   const data = JSON.parse(event.body);
   const params = {
     TableName: process.env.TABLE_NAME, // [ProjectName]-Cart
