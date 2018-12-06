@@ -2,7 +2,7 @@
 
 var redis = require("redis");
 
-// UpdateBestsellers - Updates best sellers list as orders are placed
+// UpdateBestSellers - Updates best sellers list as orders are placed
 exports.handler = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
