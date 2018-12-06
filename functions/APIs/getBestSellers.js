@@ -2,7 +2,7 @@
 
 const redis = require("redis");
 
-// GetBestsellers - Get a list of the top 20 best selling books
+// GetBestSellers - Get a list of the top 20 best selling books
 exports.handler = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
     
