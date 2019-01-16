@@ -2,7 +2,6 @@
 
 const AWS = require("aws-sdk");
 const uuid = require("uuid");
-AWS.config.update({ region: "us-east-1" });
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // Checkout - Process a customer's cart into an order

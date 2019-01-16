@@ -1,7 +1,6 @@
 "use strict";
 
 const AWS = require("aws-sdk");
-AWS.config.update({ region: "us-east-1" });
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // ListBooks - List all books or list all books in a particular category

@@ -492,10 +492,26 @@ Parameters:
     Type: String
     Default: 'https://s3.amazonaws.com/aws-bookstore-demo/bookstore-webapp.zip'
 
+Conditions:
+  IADRegion: !Equals [!Ref "AWS::Region", "us-east-1"]
 Mappings:
   S3Buckets:
     us-east-1:
       Bucket: aws-bookstore-demo
+      NeptuneDataBucket: bookstore-neptune
+      SeederFunctionBucket: fsd-aws-wildrydes-us-east-1
+    us-west-2:
+      Bucket: aws-bookstore-demo-us-west-2
+      NeptuneDataBucket: bookstore-neptune-us-west-2
+      SeederFunctionBucket: fsd-aws-wildrydes-us-west-2
+    eu-central-1:
+      Bucket: aws-bookstore-demo-eu-central-1
+      NeptuneDataBucket: bookstore-neptune-eu-central-1
+      SeederFunctionBucket: fsd-aws-wildrydes-eu-central-1
+    eu-west-1:
+      Bucket: aws-bookstore-demo-eu-west-1
+      NeptuneDataBucket: bookstore-neptune-eu-west-1
+      SeederFunctionBucket: fsd-aws-wildrydes-eu-west-1
   Constants:
     S3Keys:
       ListOrdersCode: functions/ListOrders.zip
@@ -516,8 +532,11 @@ Mappings:
       UpdateBestSellersCode: functions/UpdateBestSellers.zip
       NeptuneLoaderCode: functions/NeptuneLoader.zip
       NeptuneIAMCode: functions/NeptuneIAM.zip
-      bookstoreNeptuneS3DataPath: s3://bookstore-neptune/data/
+      bookstoreNeptuneS3DataPath: /data/
       booksData: data/books.json
+      CreateESRoleCode: functions/CreateESRole.zip
+      UpdateConfigCode: functions/UpdateConfig.zip
+      SeederFunctionCode: aws-serverless-codecommit-seeder.zip
 Resources:
 # ---------- VPC - SUBNET - SECURITY GROUPS  ---------
 
@@ -896,10 +915,17 @@ Resources:
         Variables:
           neptunedb:
             Fn::GetAtt: [ bookstoreNeptuneCluster, Endpoint ] 
-          neptuneloads3path: !FindInMap 
-                              - Constants
-                              - S3Keys
-                              - bookstoreNeptuneS3DataPath              
+          neptuneloads3path: !Join
+                              - ''
+                              - - 's3://'
+                                - !FindInMap
+                                  - S3Buckets
+                                  - !Ref 'AWS::Region'
+                                  - NeptuneDataBucket
+                                - !FindInMap
+                                  - Constants
+                                  - S3Keys
+                                  - bookstoreNeptuneS3DataPath
           region: 
             Ref: "AWS::Region"
           s3loadiamrole: 
@@ -2987,7 +3013,11 @@ Resources:
         Comment: !Sub 'CDN for ${AssetsBucketName}'
         DefaultRootObject: index.html
         Origins:
-          - DomainName: !Sub '${AssetsBucketName}.s3.amazonaws.com'
+          - DomainName: !Join
+              - ''
+              - - !Sub '${AssetsBucketName}.s3'
+                - !If [IADRegion, '', !Sub '-${AWS::Region}']
+                - '.amazonaws.com'
             Id: S3
             S3OriginConfig:
               OriginAccessIdentity: !Sub >-
@@ -3202,8 +3232,14 @@ Resources:
   SeederFunction:
     Properties:
       Code:
-        S3Bucket: fsd-aws-wildrydes-us-east-1
-        S3Key: aws-serverless-codecommit-seeder.zip
+        S3Bucket: !FindInMap
+          - S3Buckets
+          - !Ref 'AWS::Region'
+          - SeederFunctionBucket
+        S3Key: !FindInMap
+         - Constants
+         - S3Keys
+         - SeederFunctionCode
       Description: CodeCommit repository seeder
       Handler: seeder.SeedRepositoryHandler
       MemorySize: 3008
@@ -3246,8 +3282,14 @@ Resources:
   CreateESRoleFunction:
     Properties:
       Code:
-        S3Bucket: aws-bookstore-demo
-        S3Key: functions/CreateESRole.zip
+        S3Bucket: !FindInMap
+          - S3Buckets
+          - !Ref 'AWS::Region'
+          - Bucket
+        S3Key: !FindInMap
+          - Constants
+          - S3Keys
+          - CreateESRoleCode
       Description: Create Elasticsearch role
       Handler: index.handler
       Role:
@@ -3269,8 +3311,14 @@ Resources:
   UpdateConfigFunction:
     Properties:
       Code:
-        S3Bucket: aws-bookstore-demo
-        S3Key: functions/UpdateConfig.zip
+        S3Bucket: !FindInMap
+          - S3Buckets
+          - !Ref 'AWS::Region'
+          - Bucket
+        S3Key: !FindInMap
+          - Constants
+          - S3Keys
+          - UpdateConfigCode
       Description: Update config for CodeCommit repository
       Handler: index.handler
       Role:
