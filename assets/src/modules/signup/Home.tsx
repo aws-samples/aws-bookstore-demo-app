@@ -12,8 +12,16 @@ import { FriendsBought } from "../friends/FriendsBought";
 import { LinkContainer } from "react-router-bootstrap";
 import "./home.css";
 
-export default class Home extends Component {
-  constructor(props) {
+interface HomeProps {
+  isAuthenticated: boolean;
+}
+
+interface HomeState {
+  isLoading: boolean;
+}
+
+export default class Home extends Component<HomeProps, HomeState> {
+  constructor(props: HomeProps) {
     super(props);
 
     this.state = {

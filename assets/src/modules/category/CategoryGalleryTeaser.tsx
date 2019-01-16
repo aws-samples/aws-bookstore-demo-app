@@ -3,9 +3,17 @@ import "../../common/styles/gallery.css";
 import { LinkContainer } from "react-router-bootstrap";
 import { API } from "aws-amplify";
 import CategoryGalleryBook from "./CategoryGalleryBook";
+import { Book } from "../bestSellers/BestSellerProductRow";
 
-export class CategoryGalleryTeaser extends React.Component {
-  constructor(props) {
+interface CategoryGalleryTeaserProps {}
+
+interface CategoryGalleryTeaserState {
+  isLoading: boolean;
+  books: Book[];
+}
+
+export class CategoryGalleryTeaser extends React.Component<CategoryGalleryTeaserProps, CategoryGalleryTeaserState> {
+  constructor(props: CategoryGalleryTeaserProps) {
     super(props);
 
     this.state = {
@@ -26,7 +34,7 @@ export class CategoryGalleryTeaser extends React.Component {
   }
 
   listBooks() {
-    return API.get("books", "/books?category=Cookbooks");
+    return API.get("books", "/books?category=Cookbooks", null);
   }
 
   render() {

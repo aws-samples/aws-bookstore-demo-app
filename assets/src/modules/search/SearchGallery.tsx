@@ -2,9 +2,19 @@ import React from "react";
 import "../../common/styles/gallery.css";
 import { API } from "aws-amplify";
 import CategoryGalleryBook from "../category/CategoryGalleryBook";
+import { Book } from "../bestSellers/BestSellerProductRow";
 
-export class SearchGallery extends React.Component {
-  constructor(props) {
+interface SearchGalleryProps {
+  match: any;
+}
+
+interface SearchGalleryState {
+  isLoading: boolean;
+  books: Book[];
+}
+
+export class SearchGallery extends React.Component<SearchGalleryProps, SearchGalleryState> {
+  constructor(props: SearchGalleryProps) {
     super(props);
 
     this.state = {
@@ -43,7 +53,7 @@ export class SearchGallery extends React.Component {
   }
 
   searchBooks() {
-    return API.get("search", `/search?q=${this.props.match.params.id}`);
+    return API.get("search", `/search?q=${this.props.match.params.id}`, null);
   }
 
   render() {
@@ -54,7 +64,7 @@ export class SearchGallery extends React.Component {
           <div className="container-category">
             <h3>Search results</h3>
             <div className="row">
-              {this.state.books.map(book => <CategoryGalleryBook book={book} key={book.bookId} />)}
+              {this.state.books.map(book => <CategoryGalleryBook book={book} key={book.id} />)}
             </div>
           </div>
         </div>

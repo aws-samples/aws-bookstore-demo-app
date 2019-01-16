@@ -6,9 +6,24 @@ import { PurchasedProductRow } from "./PurchasedProductRow";
 import { Auth, API } from "aws-amplify";
 import bestSellers from "../../images/bestSellers.png";
 import yourshoppingcart from "../../images/yourshoppingcart.png";
+import { Order } from "../cart/CartProductRow";
 
-export default class PastPurchases extends Component {
-  constructor(props) {
+interface PastPurchasesProps {}
+
+interface Purchases {
+  orderDate: number;
+  orderId: string;
+  books: Order[];
+}
+
+interface PastPurchasesState {
+  userInfo: any; // FIXME
+  isLoading: boolean;
+  orders: Purchases[];
+}
+
+export default class PastPurchases extends Component<PastPurchasesProps, PastPurchasesState> {
+  constructor(props: PastPurchasesProps) {
     super(props);
 
     this.state = {
@@ -34,10 +49,10 @@ export default class PastPurchases extends Component {
   }
 
   listOrders() {
-    return API.get("orders", "/orders");
+    return API.get("orders", "/orders", null);
   }
 
-  getPrettyDate = (orderDate) => {
+  getPrettyDate = (orderDate: number) => {
     const date = new Date(orderDate);
     return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`
   }
@@ -59,7 +74,7 @@ export default class PastPurchases extends Component {
             .map(order => 
               <div className="order-date" key={order.orderId}>
                 <h4>{`Order date: ${this.getPrettyDate(order.orderDate)}`}</h4>
-                {order.books.map((book) => <PurchasedProductRow book={book} key={book.id} />)}
+                {order.books.map((book) => <PurchasedProductRow order={book} key={book.bookId} />)}
               </div>)
           }
           

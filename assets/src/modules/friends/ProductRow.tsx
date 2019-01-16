@@ -4,18 +4,27 @@ import StarRating from "../../common/starRating/StarRating";
 import { API } from "aws-amplify";
 import AddToCart from "../../common/AddToCart";
 import FriendRecommendations from "../../common/friendRecommendations/FriendRecommendations";
+import { Book } from "../bestSellers/BestSellerProductRow";
 
-export class ProductRow extends React.Component {
-  constructor(props) {
+interface ProductRowProps {
+  bookId: string;
+}
+
+interface ProductRowState {
+  book: Book | undefined;
+}
+
+export class ProductRow extends React.Component<ProductRowProps, ProductRowState> {
+  constructor(props: ProductRowProps) {
     super(props);
 
     this.state = {
-      book: null,
+      book: undefined,
     };
   }
 
   componentDidMount() {
-    API.get("books", `/books/${this.props.bookId}`)
+    API.get("books", `/books/${this.props.bookId}`, null)
       .then(response => this.setState({ book: response }))
       .catch(error => alert(error));
   }

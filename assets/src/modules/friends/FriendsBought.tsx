@@ -2,8 +2,17 @@ import React from "react";
 import { ProductRow } from "./ProductRow";
 import { API } from "aws-amplify";
 
-export class FriendsBought extends React.Component {
-  constructor(props) {
+interface FriendsBoughtProps {
+
+}
+
+interface FriendsBoughtState {
+  isLoading: boolean;
+  recommendations: any[]; // FIXME
+}
+
+export class FriendsBought extends React.Component<FriendsBoughtProps, FriendsBoughtState> {
+  constructor(props: FriendsBoughtProps) {
     super(props);
 
     this.state = {
@@ -13,7 +22,7 @@ export class FriendsBought extends React.Component {
   }
 
   componentDidMount() {
-    API.get("recommendations", "/recommendations")
+    API.get("recommendations", "/recommendations", null)
       .then(response => {
         this.setState({
           recommendations: response,
@@ -32,7 +41,7 @@ export class FriendsBought extends React.Component {
           <h3>Books your friends have bought</h3>
         </div>
         {this.state.recommendations.slice(0,5).map(recommendation =>
-          <ProductRow bookId={recommendation.bookId} friendsPurchased={recommendation.friendsPurchased} purchases={recommendation.purchases} key={recommendation.bookId} />
+          <ProductRow bookId={recommendation.bookId} key={recommendation.bookId} />
         )}
       </div>
     );

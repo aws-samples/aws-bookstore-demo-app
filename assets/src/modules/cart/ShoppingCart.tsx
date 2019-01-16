@@ -2,19 +2,28 @@ import React, { Component } from "react";
 import { CategoryNavBar } from "../category/categoryNavBar/CategoryNavBar";
 import { SearchBar } from "../search/searchBar/SearchBar";
 import "../../common/hero/hero.css";
-import { CartProductRow } from "./CartProductRow";
+import { CartProductRow, Order } from "./CartProductRow";
 import "../../common/styles/common.css";
 import { API } from "aws-amplify";
 import { Redirect } from "react-router";
 
-export default class ShoppingCart extends Component {
-  constructor(props) {
+interface ShoppingCartProps {}
+
+interface ShoppingCartState {
+  isLoading: boolean;
+  orders: any[]; // FIXME
+  orderTotal: number | undefined;
+  toCheckout: boolean;
+}
+
+export default class ShoppingCart extends Component<ShoppingCartProps, ShoppingCartState> {
+  constructor(props: ShoppingCartProps) {
     super(props);
 
     this.state = {
       isLoading: true,
       orders: [],
-      orderTotal: null,
+      orderTotal: undefined,
       toCheckout: false
     };
   }
@@ -34,7 +43,7 @@ export default class ShoppingCart extends Component {
   }
 
   listOrdersInCart() {
-    return API.get("cart", "/cart");
+    return API.get("cart", "/cart", null);
   }
 
   getOrderTotal = async () => {
@@ -43,7 +52,7 @@ export default class ShoppingCart extends Component {
       orders: ordersInCart,
     });
 
-    let total = ordersInCart.reduce((total, book) => {
+    let total = ordersInCart.reduce((total: number, book: Order) => {
       return total + book.price * book.quantity
     }, 0).toFixed(2);
 

@@ -15,7 +15,11 @@ import woodwork from "../../images/hero/hero-woodwork.png";
 import "../../common/hero/hero.css";
 import { categories } from "./categoryNavBar/categories";
 
-export default class CategoryView extends Component {
+interface CategoryViewProps {
+  match: any;
+}
+
+export default class CategoryView extends Component<CategoryViewProps> {
   getImage = () => {
     switch (this.props.match.params.id) {
       case categories.cooks:

@@ -2,18 +2,26 @@ import React from "react";
 import "./searchBar.css";
 import { Redirect } from "react-router";
 
-export class SearchBar extends React.Component {
-  constructor(props) {
+interface SearchBarProps {}
+
+interface SearchBarState {
+  redirect: string | undefined;
+  value: string;
+}
+
+export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+  constructor(props: SearchBarProps) {
     super(props);
 
     this.state = {
-      redirect: null,
+      redirect: undefined,
       value: ""
     };
   }
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
+  handleChange = (event: React.ChangeEvent) => {
+    const target = event.currentTarget as HTMLInputElement;
+    this.setState({ value: target.value });
   }
 
   onSearch = () => {

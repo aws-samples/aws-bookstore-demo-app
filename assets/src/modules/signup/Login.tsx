@@ -6,8 +6,22 @@ import "./login.css";
 
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export default class Login extends React.Component {
-  constructor(props) {
+interface LoginProps {
+  isAuthenticated: boolean;
+  userHasAuthenticated: (authenticated: boolean) => void;
+}
+
+interface LoginState {
+  loading: boolean;
+  redirect: boolean;
+  email: string;
+  password: string;
+  emailValid: "success" | "error" | "warning" | undefined;
+  passwordValid: "success" | "error" | "warning" | undefined;
+}
+
+export default class Login extends React.Component<LoginProps, LoginState> {
+  constructor(props: LoginProps) {
     super(props);
 
     this.state = {
@@ -15,28 +29,30 @@ export default class Login extends React.Component {
       redirect: false,
       email: "",
       password: "",
-      emailValid: null,
-      passwordValid: null,
+      emailValid: undefined,
+      passwordValid: undefined,
     };
   }
 
-  onEmailChange = (event) => {
+  onEmailChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement;
     this.setState({
-      email: event.target.value,
-      emailValid: emailRegex.test(event.target.value.toLowerCase()) ? 'success' : 'error'
+      email: target.value,
+      emailValid: emailRegex.test(target.value.toLowerCase()) ? 'success' : 'error'
     });
   }
 
-  onPasswordChange = (event) => {
+  onPasswordChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement;
     this.setState({
-      password: event.target.value,
-      passwordValid: event.target.value.length < 8 ? 'error' : 'success'
+      password: target.value,
+      passwordValid: target.value.length < 8 ? 'error' : 'success'
     });
   }
 
-  onLogin = async (event) => {
+  onLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ loading: true });
   
     try {
       await Auth.signIn(this.state.email, this.state.password);
@@ -44,7 +60,7 @@ export default class Login extends React.Component {
       this.setState({ redirect: true })
     } catch (e) {
       alert(e.message);
-      this.setState({ isLoading: false });
+      this.setState({ loading: false });
     }
   }
 
@@ -78,10 +94,8 @@ export default class Login extends React.Component {
             block
             bsSize="large"
             type="submit"
-            isLoading={this.state.isLoading}
-            text="Log in"
             disabled={this.state.passwordValid !== 'success' || this.state.emailValid !== 'success' }>
-            {this.state.isLoading && <Glyphicon glyph="refresh" className="spinning" />}Log in
+            {this.state.loading && <Glyphicon glyph="refresh" className="spinning" />}Log in
           </Button>
         </form>
       </div>

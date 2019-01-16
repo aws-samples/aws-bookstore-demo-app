@@ -2,7 +2,11 @@ import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
 import "./starRating.css";
 
-class StarRating extends React.Component {
+interface StarRatingProps {
+  stars: number
+}
+
+class StarRating extends React.Component<StarRatingProps> {
   render() { 
     return (
       <span>             

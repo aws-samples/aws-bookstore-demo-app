@@ -10,7 +10,9 @@ import Sarah from "../../images/avatars/Sarah.png";
 
 const friends = [Brenda, Erin, Jacob, Jeff, Jennifer, John, Sarah];
 
-export class FriendThumb extends React.Component {
+interface FriendThumbProps {}
+
+export class FriendThumb extends React.Component<FriendThumbProps> {
   render() {
     const randomFriend = friends[Math.floor(Math.random() * friends.length)];
     return (

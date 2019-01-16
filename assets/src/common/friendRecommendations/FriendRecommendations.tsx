@@ -2,8 +2,16 @@ import { API } from 'aws-amplify';
 import React from 'react';
 import { FriendThumb } from './FriendThumb';
 
-class FriendRecommendations extends React.Component {
-  constructor(props) {
+interface FriendRecommendationsProps {
+  bookId: string;
+}
+
+interface FriendRecommendationsState {
+  friends: any[];
+}
+
+class FriendRecommendations extends React.Component<FriendRecommendationsProps, FriendRecommendationsState> {
+  constructor(props: FriendRecommendationsProps) {
     super(props);
 
     this.state = {
@@ -12,7 +20,7 @@ class FriendRecommendations extends React.Component {
   }
 
   getFriends = () => {
-    return API.get("recommendations", `/recommendations/${this.props.bookId}`);
+    return API.get("recommendations", `/recommendations/${this.props.bookId}`, null);
   }
 
   async componentDidMount() {
@@ -36,7 +44,7 @@ class FriendRecommendations extends React.Component {
       <div>
         <div>Friends who bought this book</div>
         <p>
-          {friends.slice(0, 3).map(friend => <FriendThumb key={friend} />)}
+          {friends.slice(0, 3).map((friend: any) => <FriendThumb key={friend} />)}
           {numFriendsPurchased > 3 && <span className="orange">{` +${numFriendsPurchased - 3} ${(numFriendsPurchased - 3) > 1 ? "others" : "other"}`}</span>}
         </p>
       </div>

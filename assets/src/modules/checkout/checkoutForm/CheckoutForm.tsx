@@ -1,21 +1,35 @@
 import React from "react";
-import { FormGroup, FormControl, ControlLabel, Form } from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel, Form, FormControlProps } from "react-bootstrap";
 
 import "./checkoutForm.css";
 import supportedCards from "../../../images/supportedCards.png";
 import { API } from "aws-amplify";
 import { Redirect } from "react-router";
 
-export class CheckoutForm extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+interface CheckoutFormProps {}
+
+interface CheckoutFormState {
+  card: string;
+  expDate: string | undefined;
+  ccv: string;
+  isLoading: boolean;
+  toCart: boolean;
+  orders: any[];
+  toConfirm: boolean;
+}
+
+export class CheckoutForm extends React.Component<CheckoutFormProps, CheckoutFormState> {
+  constructor(props: CheckoutFormProps) {
+    super(props);
 
     this.state = {
       card: '1010101010101010',
-      expDate: null,
+      expDate: undefined,
       ccv: '123',
       isLoading: true,
       toCart: false,
+      orders: [],
+      toConfirm: false,
     };
   }
 
@@ -33,7 +47,7 @@ export class CheckoutForm extends React.Component {
   }
 
   listOrdersInCart() {
-    return API.get("cart", "/cart");
+    return API.get("cart", "/cart", null);
   }
 
   getOrderTotal = () => {
@@ -49,8 +63,12 @@ export class CheckoutForm extends React.Component {
     return null;
   }
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement
+    this.setState({ 
+      ...this.state,
+      [target.name as any]: target.value
+    });
   }
 
   onCheckout = () => {

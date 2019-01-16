@@ -4,13 +4,30 @@ import { API } from "aws-amplify";
 import StarRating from "../../common/starRating/StarRating";
 import FriendRecommendations from "../../common/friendRecommendations/FriendRecommendations";
 import { Glyphicon } from "react-bootstrap";
+import { Book } from "../bestSellers/BestSellerProductRow";
 
-export class CartProductRow extends React.Component {
-  constructor(props) {
+export interface Order {
+  bookId: string;
+  quantity: number;
+  price: number
+}
+
+interface CartProductRowProps {
+  order: Order;
+  calculateTotal: () => void;
+}
+
+interface CartProductRowState {
+  book: Book | undefined;
+  removeLoading: boolean;
+}
+
+export class CartProductRow extends React.Component<CartProductRowProps, CartProductRowState> {
+  constructor(props: CartProductRowProps) {
     super(props);
 
     this.state = {
-      book: null,
+      book: undefined,
       removeLoading: false
     };
   }
@@ -24,8 +41,8 @@ export class CartProductRow extends React.Component {
     }
   }
 
-  getBook(order) {
-    return API.get("books", `/books/${order.bookId}`);
+  getBook(order: Order) {
+    return API.get("books", `/books/${order.bookId}`, null);
   }
 
   onRemove = async () => {
@@ -39,7 +56,7 @@ export class CartProductRow extends React.Component {
     this.props.calculateTotal();
   }
 
-  onQuantityUpdated = async (event) => {
+  onQuantityUpdated = async (event: any) => {
     await API.put("cart", "/cart", {
       body: {
         bookId: this.props.order.bookId,
@@ -72,7 +89,7 @@ export class CartProductRow extends React.Component {
               <div className="pull-right">
                 <div className="input-group">
 
-                  <input type="number" className="form-control" placeholder="Quantity" defaultValue={this.props.order.quantity} onChange={this.onQuantityUpdated} min={1} />
+                  <input type="number" className="form-control" placeholder="Quantity" defaultValue={this.props.order.quantity.toString()} onChange={this.onQuantityUpdated} min={1} />
                   <span className="input-group-btn">
                     <button className="btn btn-black" type="button" onClick={this.onRemove} disabled={this.state.removeLoading}>
                       {this.state.removeLoading && <Glyphicon glyph="refresh" className="spinning" />} 

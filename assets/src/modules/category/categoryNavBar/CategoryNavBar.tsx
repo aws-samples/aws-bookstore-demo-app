@@ -2,7 +2,6 @@ import React from "react";
 import { categories } from "./categories";
 import "./categories.css"
 
-
 export class CategoryNavBar extends React.Component {
   render() {
     return (
@@ -15,4 +14,3 @@ export class CategoryNavBar extends React.Component {
 }
 
 export default CategoryNavBar;
-

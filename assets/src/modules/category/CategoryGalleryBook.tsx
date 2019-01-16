@@ -2,8 +2,13 @@ import React from "react";
 import "../../common/styles/gallery.css";
 import StarRating from "../../common/starRating/StarRating";
 import AddToCart from "../../common/AddToCart";
+import { Book } from "../bestSellers/BestSellerProductRow";
 
-export class CategoryGalleryBook extends React.Component {
+interface CategoryGalleryBookProps {
+  book: Book;
+}
+
+export class CategoryGalleryBook extends React.Component<CategoryGalleryBookProps> {
   render() {
     if (!this.props.book) return;
     return (

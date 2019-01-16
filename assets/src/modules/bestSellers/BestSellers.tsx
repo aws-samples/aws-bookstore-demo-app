@@ -5,8 +5,15 @@ import BestSellerProductRow from "./BestSellerProductRow";
 import { CategoryNavBar } from "../category/categoryNavBar/CategoryNavBar";
 import { SearchBar } from "../search/searchBar/SearchBar";
 
-export default class BestSellers extends React.Component {
-  constructor(props) {
+interface BestSellersProps {}
+
+interface BestSellersState {
+  isLoading: boolean;
+  books: { bookId: any; }[];
+}
+
+export default class BestSellers extends React.Component<BestSellersProps, BestSellersState> {
+  constructor(props: BestSellersProps) {
     super(props);
 
     this.state = {
@@ -18,7 +25,7 @@ export default class BestSellers extends React.Component {
   async componentDidMount() {
     try {
       const books = [];
-      const bestSellers = await API.get("bestsellers", "/bestsellers");
+      const bestSellers = await API.get("bestsellers", "/bestsellers", null);
       
       // Map the elasticache results to a book object
       for (var i = 0; i < bestSellers.length; i++) {

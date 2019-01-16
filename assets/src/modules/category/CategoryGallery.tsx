@@ -2,9 +2,19 @@ import React from "react";
 import "../../common/styles/gallery.css";
 import { API } from "aws-amplify";
 import CategoryGalleryBook from "./CategoryGalleryBook";
+import { Book } from "../bestSellers/BestSellerProductRow";
 
-export class CategoryGallery extends React.Component {
-  constructor(props) {
+interface CategoryGalleryProps {
+  match: any;
+}
+
+interface CategoryGalleryState {
+  isLoading: boolean;
+  books: Book[];
+}
+
+export class CategoryGallery extends React.Component<CategoryGalleryProps, CategoryGalleryState> {
+  constructor(props: CategoryGalleryProps) {
     super(props);
 
     this.state = {
@@ -25,7 +35,7 @@ export class CategoryGallery extends React.Component {
   }
 
   listBooks() {
-    return API.get("books", `/books?category=${this.props.match.params.id}` );
+    return API.get("books", `/books?category=${this.props.match.params.id}`, null);
   }
 
   render() {

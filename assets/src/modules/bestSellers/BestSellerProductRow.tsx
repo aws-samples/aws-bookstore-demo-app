@@ -6,12 +6,30 @@ import FriendRecommendations from "../../common/friendRecommendations/FriendReco
 import StarRating from "../../common/starRating/StarRating";
 import "../../common/styles/productRow.css";
 
-export class ProductRow extends React.Component {
-  constructor(props) {
+interface ProductRowProps {
+  bookId: string;
+}
+
+export interface Book {
+  id: string;
+  cover: string;
+  price: number;
+  category: string;
+  name: string;
+  rating: number;
+  author: string;
+}
+
+interface ProductRowState {
+  book: Book | undefined;
+}
+
+export class ProductRow extends React.Component<ProductRowProps, ProductRowState> {
+  constructor(props: ProductRowProps) {
     super(props);
 
     this.state = {
-      book: null,
+      book: undefined,
     };
   }
 
@@ -25,7 +43,7 @@ export class ProductRow extends React.Component {
   }
 
   getBook() {
-    return API.get("books", `/books/${this.props.bookId}`);
+    return API.get("books", `/books/${this.props.bookId}`, null);
   }
 
   render() {

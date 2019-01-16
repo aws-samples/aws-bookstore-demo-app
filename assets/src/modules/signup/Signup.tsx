@@ -7,8 +7,27 @@ import "./home.css";
 
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export default class Signup extends React.Component {
-  constructor(props) {
+interface SignupProps {
+  isAuthenticated: boolean;
+  userHasAuthenticated: (authenticated: boolean) => void;
+}
+
+interface SignupState {
+  loading: boolean;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  confirmationCode: string;
+  emailValid: "success" | "error" | "warning" | undefined;
+  passwordValid: "success" | "error" | "warning" | undefined;
+  confirmPasswordValid: "success" | "error" | "warning" | undefined;
+  confirmationCodeValid: "success" | "error" | "warning" | undefined;
+  user: any;
+  redirect: boolean;
+}
+
+export default class Signup extends React.Component<SignupProps, SignupState> {
+  constructor(props: SignupProps) {
     super(props);
 
     this.state = {
@@ -17,43 +36,48 @@ export default class Signup extends React.Component {
       password: "",
       confirmPassword: "",
       confirmationCode: "",
-      emailValid: null,
-      passwordValid: null,
-      confirmPasswordValid: null,
-      confirmationCodeValid: null,
-      user: null
+      emailValid: undefined,
+      passwordValid: undefined,
+      confirmPasswordValid: undefined,
+      confirmationCodeValid: undefined,
+      user: undefined,
+      redirect: false
     };
   }
 
-  onEmailChange = (event) => {
+  onEmailChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement;
     this.setState({
-      email: event.target.value,
-      emailValid: emailRegex.test(event.target.value.toLowerCase()) ? 'success' : 'error'
+      email: target.value,
+      emailValid: emailRegex.test(target.value.toLowerCase()) ? 'success' : 'error'
     });
   }
 
-  onPasswordChange = (event) => {
+  onPasswordChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement;
     this.setState({
-      password: event.target.value,
-      passwordValid: event.target.value.length < 8 ? 'error' : 'success'
+      password: target.value,
+      passwordValid: target.value.length < 8 ? 'error' : 'success'
     });
   }
 
-  onConfirmPasswordChange = (event) => {
+  onConfirmPasswordChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement;
     this.setState({
-      confirmPassword: event.target.value,
-      confirmPasswordValid: event.target.value !== this.state.password ? 'error' : 'success'
+      confirmPassword: target.value,
+      confirmPasswordValid: target.value !== this.state.password ? 'error' : 'success'
     });
   }
 
-  onConfirmationCodeChange = (event) => {
+  onConfirmationCodeChange = (event: React.FormEvent<FormControl>) => {
+    const target = event.target as HTMLInputElement;
     this.setState({
-      confirmationCode: event.target.value,
-      confirmationCodeValid: event.target.value.length > 0 ? 'error' : 'success'
+      confirmationCode: target.value,
+      confirmationCodeValid: target.value.length > 0 ? 'error' : 'success'
     });
   }
 
-  onSignup = async (event) => {
+  onSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     this.setState({ loading: true });
   
@@ -69,7 +93,7 @@ export default class Signup extends React.Component {
     }
   }
   
-  onConfirm = async (event) => {
+  onConfirm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     this.setState({ loading: true });
   
@@ -104,10 +128,8 @@ export default class Signup extends React.Component {
           block
           bsSize="large"
           type="submit"
-          isLoading={this.state.loading}
-          text="Confirm"
           disabled={this.state.confirmationCodeValid === 'success'}>
-          {this.state.loading && <Glyphicon glyph="refresh" className="spinning" />}Log in
+          {this.state.loading && <Glyphicon glyph="refresh" className="spinning" />}Confirm
         </Button>
       </form>
     );
@@ -151,8 +173,6 @@ export default class Signup extends React.Component {
           block
           bsSize="large"
           type="submit"
-          isLoading={this.state.loading}
-          text="Sign up"
           disabled={this.state.passwordValid !== 'success' || this.state.confirmPasswordValid !== 'success' || this.state.emailValid !== 'success'}>
           {this.state.loading && <Glyphicon glyph="refresh" className="spinning" />}Log in
         </Button>
@@ -163,7 +183,7 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div className="Signup">
-        {this.state.user === null ? this.showSignupForm() : this.showConfirmationForm()}
+        {this.state.user === undefined ? this.showSignupForm() : this.showConfirmationForm()}
       </div>
     );
   }

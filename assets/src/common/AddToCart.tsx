@@ -3,8 +3,19 @@ import { API } from 'aws-amplify';
 import { Redirect } from 'react-router';
 import { Glyphicon } from 'react-bootstrap';
 
-class AddToCart extends React.Component {
-  constructor(props) {
+interface AddToCartProps {
+  bookId: string;
+  price: number;
+  variant?: string;
+}
+
+interface AddToCartState {
+  loading: boolean;
+  toCart: boolean;
+}
+
+class AddToCart extends React.Component<AddToCartProps, AddToCartState> {
+  constructor(props: AddToCartProps) {
     super(props);
 
     this.state = {
@@ -15,7 +26,7 @@ class AddToCart extends React.Component {
 
   onAddToCart = async () => {
     this.setState({ loading: true });
-    const bookInCart = await API.get("cart", `/cart/${this.props.bookId}`);
+    const bookInCart = await API.get("cart", `/cart/${this.props.bookId}`, null);
 
     // if the book already exists in the cart, increase the quantity
     if (bookInCart) {

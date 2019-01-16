@@ -3,7 +3,11 @@ import { CategoryNavBar } from "../category/categoryNavBar/CategoryNavBar";
 import { SearchBar } from "./searchBar/SearchBar";
 import { SearchGallery } from "./SearchGallery";
 
-export default class SearchView extends Component {
+interface SearchViewProps {
+  match: any;
+}
+
+export default class SearchView extends Component<SearchViewProps> {
   render() {
     return (
       <div className="Category">
