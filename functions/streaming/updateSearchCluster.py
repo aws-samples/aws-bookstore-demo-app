@@ -22,9 +22,16 @@ def handler(event, context):
     for record in event["Records"]:
         # Get the primary key for use as the Elasticsearch ID
         id = record["dynamodb"]["Keys"]["id"]["S"]
-        print id
+        print "bookId " + id
 
-        document = record["dynamodb"]["NewImage"]
-        r = requests.put(url + id, auth=awsauth, json=document, headers=headers)
-        count += 1
+        try:
+            document = record["dynamodb"]["NewImage"]
+            r = requests.put(url + id, auth=awsauth, json=document, headers=headers)
+            count += 1
+        except KeyError:
+            # this execution path is to cater for deleted records
+            document = record["dynamodb"]["OldImage"]
+            r = requests.delete(url + id, auth=awsauth, json=document, headers=headers)
+            count += 1
+        
     return str(count) + " records processed."
