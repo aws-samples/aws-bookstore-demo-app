@@ -673,7 +673,7 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 ## Known limitations
 
 * The application was written for demonstration purposes and not for production use.
-* Orders are backed by DynamoDB, but no mechanism exists to recreate the table in the unlikely scenario of a Redis failure.
+* Orders are backed by DynamoDB, but no mechanism exists to recreate the best sellers list in the unlikely scenario of a Redis failure.
 * Upon the first use of a Lambda function, cold start times in a VPC can be slow. Once the Lambda function has been warmed up, performance will improve.  See #6 in [Considerations for demo purposes](#considerations-for-demo-purposes) for more information.
 * The application is not currently designed for for high availability. You can increase the availability of the application by configuring the Amazon Elasticsearch, Amazon Neptune, and Amazon ElastiCache clusters with multiple instances across multiple AZs.
 * The application enables multiple users to sign into the application but the social graph is single user. As a result, different users will see the same social graph. Further, when new books are purchased, that state is not reflected in the social graph.
