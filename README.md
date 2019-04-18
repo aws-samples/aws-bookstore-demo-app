@@ -1,6 +1,6 @@
 ## AWS Bookstore Demo App
 
-AWS Bookstore Demo App is a full-stack sample web application that creates a storefront (and backend) for customers to shop for fictitious books. The entire application can be created with a single CloudFormation template. [Try out the deployed application here](https://d2h3ljlsmzojxz.cloudfront.net/)!
+AWS Bookstore Demo App is a full-stack sample web application that creates a storefront (and backend) for customers to shop for fictitious books. The entire application can be created with a single CloudFormation template. **[Try out the deployed application here](https://d2h3ljlsmzojxz.cloudfront.net/)**!
 
 You can browse and search for books, look at recommendations and best sellers, manage your cart, checkout, view your orders, and more.  Get started with building your own below!
 &nbsp;
@@ -62,6 +62,8 @@ The provided CloudFormation template automates the entire creation and deploymen
 * Serverless web application – Amazon CloudFront and Amazon S3 provide a globally-distributed application. 
 
 You can choose to customize the template to create your own bookstore, modify it to make a different type of store, or change it to make a completely different type of web application.  
+
+The AWS Bookstore Demo App is built on-top of **AWS Full-Stack Template** (available at https://github.com/awslabs/aws-full-stack-template), which provides the foundational services, components, and plumbing needed to get a basic web application up and running. Users can build on top of AWS Full-Stack Template to create any application they envision, whether a travel booking tool, a blog, or another web app.  This AWS Bookstore Demo App is just one example of what you can create using AWS Full-Stack Template. 
 
 &nbsp;
 
@@ -690,6 +692,8 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 We are excited that you are interested in using the AWS Bookstore Demo App!  This is a great place to start if you are just beginning with AWS and want to get a functional application up and running.  It is equally useful if you are looking for a sample full-stack application to fork off of and build your own custom application.  We encourage developer participation via contributions and suggested additions.  Of course you are welcome to create your own version!
 
 Please see the [contributing guidelines](CONTRIBUTING.md) for more information.
+
+For a more basic example of a full-stack web application, check out **AWS Full-Stack Template** (available at https://github.com/awslabs/aws-full-stack-template) upon which AWS Bookstore Demo App was built.  As mentioned in the Overview section, AWS Full-Stack Template provides the foundational services, components, and plumbing needed to get a basic web application up and running. Users can build on top of AWS Full-Stack Template to create any application they envision, whether a travel booking tool, a blog, or another web app.  This AWS Bookstore Demo App is just one example of what you can create using AWS Full-Stack Template.
 
 &nbsp;
 
