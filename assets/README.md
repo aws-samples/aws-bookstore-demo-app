@@ -119,13 +119,13 @@ Remember to shut down/remove all related resources once you are finished to avoi
 
 **Summary diagram**
 
-![Summary Diagram](readmeImages/SummaryDiagram.png)
+![Summary Diagram](assets/readmeImages/SummaryDiagram.png)
 
 &nbsp;
 
 **High-level, end-to-end diagram**
 
-![High-level Architectural Diagram](readmeImages/ArchDiagram.png)
+![High-level Architectural Diagram](assets/readmeImages/ArchDiagram.png)
 
 &nbsp;
 
@@ -137,7 +137,7 @@ Build artifacts are stored in a S3 bucket where web application assets are maint
 
 The core of the backend infrastructure consists of Amazon Cognito, Amazon DynamoDB, AWS Lambda, and Amazon API Gateway. The application leverages Amazon Cognito for user authentication, and Amazon DynamoDB to store all of the data for books, orders, and the checkout cart. As books and orders are added, Amazon DynamoDB Streams push updates to AWS Lambda functions that update the Amazon Elasticsearch cluster and Amazon ElasticCache for Redis cluster.  Amazon Elasticsearch powers search functionality for books, and Amazon Neptune stores information on a user's social graph and book purchases to power recommendations. Amazon ElasticCache for Redis powers the books leaderboard. 
 
-![Backend Diagram](readmeImages/BackendDiagram.png)
+![Backend Diagram](assets/readmeImages/BackendDiagram.png)
 
 &nbsp;
 
@@ -145,7 +145,7 @@ The core of the backend infrastructure consists of Amazon Cognito, Amazon Dynamo
 
 The code is hosted in AWS CodeCommit. AWS CodePipeline builds the web application using AWS CodeBuild. After successfully building, CodeBuild copies the build artifacts into a S3 bucket where the web application assets are maintained (like book cover photos, web graphics, etc.). Along with uploading to Amazon S3, CodeBuild invalidates the cache so users always see the latest experience when accessing the storefront through the Amazon CloudFront distribution.  AWS CodeCommit. AWS CodePipeline, and AWS CodeBuild are used in the deployment and update processes only, not while the application is in a steady-state of use.
 
-![Developer Tools Diagram](readmeImages/DeveloperTools.png)
+![Developer Tools Diagram](assets/readmeImages/DeveloperTools.png)
 
 &nbsp;
 
@@ -358,10 +358,7 @@ AddToCartRequest {
 
 ```js
 AddToCartResponse {
-    customerId: string
-    bookId: string
-    quantity: number
-    price: number
+
 }
 ```
 
@@ -378,8 +375,7 @@ RemoveFromCartRequest {
 
 ```js
 RemoveFromCartResponse {
-    customerId: string
-    bookId: string
+
 }
 ```
 
@@ -677,7 +673,7 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 ## Known limitations
 
 * The application was written for demonstration purposes and not for production use.
-* Orders are backed by DynamoDB, but no mechanism exists to recreate the table in the unlikely scenario of a Redis failure.
+* Orders are backed by DynamoDB, but no mechanism exists to recreate the best sellers list in the unlikely scenario of a Redis failure.
 * Upon the first use of a Lambda function, cold start times in a VPC can be slow. Once the Lambda function has been warmed up, performance will improve.  See #6 in [Considerations for demo purposes](#considerations-for-demo-purposes) for more information.
 * The application is not currently designed for for high availability. You can increase the availability of the application by configuring the Amazon Elasticsearch, Amazon Neptune, and Amazon ElastiCache clusters with multiple instances across multiple AZs.
 * The application enables multiple users to sign into the application but the social graph is single user. As a result, different users will see the same social graph. Further, when new books are purchased, that state is not reflected in the social graph.
