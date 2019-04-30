@@ -20,8 +20,8 @@ export default class Checkout extends Component {
         </div>
         <div className="well-bs full-page no-padding-bottom no-padding-top">
           <div className="white-box padding-50 no-margin-top col-md-12 no-margin-bottom">
-            <h4 className="text-center">Your puchase is complete!</h4>
-            <button className="btn btn-black center-block" type="button" disabled={false}>View Receipt</button>
+            <h4 className="text-center">Your purchase is complete!</h4>
+            <button className="btn btn-black btn-black-center" type="button" disabled={false}>View Receipt</button>
           </div>
           <div className="no-margin-top no-padding">
             <a href="/best"><img src={bestSellers} alt="Best sellers" className="checkout-img no-padding" /></a>

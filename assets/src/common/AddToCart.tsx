@@ -56,7 +56,7 @@ class AddToCart extends React.Component<AddToCartProps, AddToCartState> {
 
   getVariant = () => {
     let style = "btn btn-black"
-    return this.props.variant && this.props.variant === "center" ? style + ` center-block` : style + ` pull-right`;
+    return this.props.variant && this.props.variant === "center" ? style + ` btn-black-center` : style + ` pull-right`;
   }
 
   render() {
