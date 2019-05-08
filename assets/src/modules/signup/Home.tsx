@@ -44,7 +44,9 @@ export default class Home extends Component<HomeProps, HomeState> {
         <hr />
         <p>This is a sample application demonstrating how different types of databases and AWS services can work together to deliver a delightful user experience.  In this bookstore demo, users can browse and search for books, view recommendations, see the leaderboard, view past orders, and more.  You can get this sample application up and running in your own environment and learn more about the architecture of the app by looking at the <a href="https://github.com/aws-samples/aws-bookstore-demo-app" target="_blank">github repository</a>.</p>
         <div className="button-container col-md-12">
+          <LinkContainer to="/signup">
           <a href="/signup">Sign up to explore the demo</a>
+          </LinkContainer>
         </div>
         <img src={screenshot} className="img-fluid full-width" alt="Screenshot"></img>
         <div className="product-section">
