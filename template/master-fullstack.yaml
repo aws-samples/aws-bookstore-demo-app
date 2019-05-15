@@ -485,9 +485,9 @@ Parameters:
     ConstraintDescription: Must be lowercase and under ten characters
   AssetsBucketName:
     Type: String
-    Description: Name of assets S3 bucket to create (lowercase, numbers or - only)
-    AllowedPattern: "^[a-z0-9-]{3,63}$"
-    ConstraintDescription: Must be between 3 and 63 characters (lowercase, numbers or -)
+    Description: Name of assets S3 bucket to create (lowercase, numbers or - only, S3 Buckets are globally unique)
+    AllowedPattern: "^[a-z0-9-]{3,53}$"
+    ConstraintDescription: Must be between 3 and 53 characters (lowercase, numbers or -)
   SeedRepository:
     Type: String
     Default: 'https://s3.amazonaws.com/aws-bookstore-demo/bookstore-webapp.zip'
@@ -1304,7 +1304,7 @@ Resources:
       Role: !GetAtt 
         - RedisRole
         - Arn
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -1362,7 +1362,7 @@ Resources:
       Description: Get list of books ordered by customerId
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1389,7 +1389,7 @@ Resources:
       Description: Get book by id
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1416,7 +1416,7 @@ Resources:
       Description: Get list of books by category
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1443,7 +1443,7 @@ Resources:
       Description: Update Customer's cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1470,7 +1470,7 @@ Resources:
       Description: Get item in cart by customer and book id
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1497,7 +1497,7 @@ Resources:
       Description: Get list of items in cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1524,7 +1524,7 @@ Resources:
       Description: Add a book to cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1551,7 +1551,7 @@ Resources:
       Description: Remove a book from cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1578,7 +1578,7 @@ Resources:
       Description: Get list of books ordered by customerId
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1753,7 +1753,7 @@ Resources:
       Role: !GetAtt
         - RedisRole
         - Arn
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -3130,7 +3130,7 @@ Resources:
   PipelineArtifactsBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub '${ProjectName}-assets-pipeline-artifacts'
+      BucketName: !Sub '${AssetsBucketName}-pipeline'
       AccessControl: Private
     Metadata:
       'AWS::CloudFormation::Designer':
@@ -3192,7 +3192,7 @@ Resources:
         - CodePipelineRole
         - Arn
       ArtifactStore:
-        Location: !Sub '${ProjectName}-assets-pipeline-artifacts'
+        Location: !Sub '${AssetsBucketName}-pipeline'
         Type: S3
       Stages:
         - Name: Source
