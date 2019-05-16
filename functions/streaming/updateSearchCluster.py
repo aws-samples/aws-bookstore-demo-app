@@ -24,14 +24,11 @@ def handler(event, context):
         id = record["dynamodb"]["Keys"]["id"]["S"]
         print "bookId " + id
 
-        try:
-            document = record["dynamodb"]["NewImage"]
+        if record['eventName'] == 'REMOVE':
+            r = requests.delete(url + id, auth=awsauth)
+        else:
+            document = record['dynamodb']['NewImage']
             r = requests.put(url + id, auth=awsauth, json=document, headers=headers)
-            count += 1
-        except KeyError:
-            # this execution path is to cater for deleted records
-            document = record["dynamodb"]["OldImage"]
-            r = requests.delete(url + id, auth=awsauth, json=document, headers=headers)
-            count += 1
+        count += 1
         
     return str(count) + " records processed."
