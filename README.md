@@ -31,6 +31,7 @@ This sample code is made available under a modified MIT license. See the LICENSE
   - [Amazon VPC](#amazon-vpc)
   - [Amazon Cloudwatch](#amazon-cloudwatch)
   - [AWS CodeCommit, AWS CodePipeline, AWS CodeBuild](#aws-codecommit-aws-codepipeline-aws-codebuild)
+- [Running your web application locally](#running-your-web-application-locally)
 - [Considerations for demo purposes](#considerations-for-demo-purposes)
 - [Known limitations](#known-limitations)
 - [Additions, forks, and contributions](#additions-forks-and-contributions)
@@ -652,6 +653,31 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 
 &nbsp;
 
+## Running your web application locally
+
+1. If you haven't setup Git credentials for AWS CodeCommit before, head to the IAM Console. If you have already you can skip to step 5. 
+2. Click on your IAM user.
+3. Click on the **Security credentials tab**. Scroll to the bottom and click **Generate** underneath the **HTTPS Git credentials for AWS CodeCommit**.
+4. Download and save these credentials. You will use these credentials when cloning your repository. 
+&nbsp;
+
+5. Go to the CodeCommit console and find your code repository.
+5. Click the HTTPS button underneath the **Clone URL** column. 
+6. Open up your terminal, type `git clone ` paste the Clone URL and hit enter. 
+&nbsp;
+
+7. Once the repository has created, run `npm install`. 
+8. After all dependencies have been downloaded, run `npm run start`.
+&nbsp;
+
+Your done! Any future updates you make to your repository get pushed to your code pipeline automatically and published to your web application endpoint. 
+
+&nbsp;
+
+---
+
+&nbsp;
+
 ## Considerations for demo purposes
 
 1. In order to make the AWS Bookstore Demo App an effective demonstration from the moment it is created, the CloudFormation template kicks off a Lambda function we wrote to pre-load a list of books into the product catalog (the Books table in DynamoDB).  In the same way, we used a Lambda function to pre-load sample friends (into Neptune) and manually populated the list of Best Sellers (on the front page only).  This enables you to sign up as a new user and immediately see what the running store would look like, including recommendations based on what friends have purchased and what the best-selling books section does.  
@@ -686,6 +712,7 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 ---
 
 &nbsp;
+
 
 ## Additions, forks, and contributions
 
