@@ -3149,15 +3149,18 @@ Resources:
         EnvironmentVariables:
           - Name: S3_BUCKET
             Value: !Ref PipelineArtifactsBucket
-        Image: 'aws/codebuild/nodejs:7.0.0'
+        Image: 'aws/codebuild/standard:2.0'
         Type: LINUX_CONTAINER
       Name: !Sub '${ProjectName}-build'
       ServiceRole: !Ref CodeBuildRole
       Source:
         Type: CODEPIPELINE
         BuildSpec: !Sub |
-          version: 0.1
+          version: 0.2
           phases:
+            install:
+              runtime-versions:
+                nodejs: 8
             pre_build:
               commands:
                 - echo Installing NPM dependencies...
