@@ -113,13 +113,15 @@ EU (Frankfurt) |	eu-central-1 | [![Launch Stack](https://cdn.rawgit.com/buildkit
 
 ### Cleaning up
 
-To tear down your application and remove all resources associated with the AWS Bookstore Demo App, follow these steps:
+To tear down your application and remove all resources associated with AWS Bookstore Demo App, follow these steps:
 
-1. Log into the AWS CloudFormation Console and find the stack you created for the demo app
-2. Delete the stack
-    1. Double-check that the S3 buckets created for the stack were successfully removed.
+1. Log into the [Amazon S3 Console](console.aws.amazon.com/s3) and  delete the buckets created for the demo app.  
+   - There should be two buckets created for AWS Bookstore Demo App.  The buckets will be titled "X" and "X-pipeline", where "X" is the name you specified in the CloudFormation wizard under the AssetsBucketName parameter.  
+   - *Note: Please be **very careful** to only delete the buckets associated with this app that you are absolutely sure you want to delete.*
+2. Log into the AWS CloudFormation Console and find the stack you created for the demo app
+3. Delete the stack
 
-Remember to shut down/remove all related resources once you are finished to avoid ongoing charges to your AWS account.
+*Remember to shut down/remove all related resources once you are finished to avoid ongoing charges to your AWS account.*
 
 &nbsp;
 
