@@ -41,9 +41,9 @@ This sample code is made available under a modified MIT license. See the LICENSE
 
 ## Overview
 
-The goal of the AWS Bookstore Demo App is to provide a fully-functional web application that utilizes multiple purpose-built AWS databases and native AWS components like Amazon API Gateway and AWS CodePipeline. Increasingly, modern web apps are built using a multitude of different databases. Developers break their large applications into individual components and select the best database for each job. Let's consider the AWS Bookstore Demo App as an example. The app contains multiple experiences such a shopping cart, product search, recommendations, and a top sellers list. For each of these use cases, the app makes use of a purpose-built database so the developer never has to compromise on functionality, performance, or scale. 
+The goal of AWS Bookstore Demo App is to provide a fully-functional web application that utilizes multiple purpose-built AWS databases and native AWS components like Amazon API Gateway and AWS CodePipeline. Increasingly, modern web apps are built using a multitude of different databases. Developers break their large applications into individual components and select the best database for each job. Let's consider AWS Bookstore Demo App as an example. The app contains multiple experiences such a shopping cart, product search, recommendations, and a top sellers list. For each of these use cases, the app makes use of a purpose-built database so the developer never has to compromise on functionality, performance, or scale. 
 
-The provided CloudFormation template automates the entire creation and deployment of the AWS Bookstore Demo App.  The template includes the following components:
+The provided CloudFormation template automates the entire creation and deployment of AWS Bookstore Demo App.  The template includes the following components:
 
 **Database components**
 
@@ -64,7 +64,7 @@ The provided CloudFormation template automates the entire creation and deploymen
 
 You can choose to customize the template to create your own bookstore, modify it to make a different type of store, or change it to make a completely different type of web application.  
 
-The AWS Bookstore Demo App is built on-top of **AWS Full-Stack Template** (available at https://github.com/awslabs/aws-full-stack-template), which provides the foundational services, components, and plumbing needed to get a basic web application up and running. Users can build on top of AWS Full-Stack Template to create any application they envision, whether a travel booking tool, a blog, or another web app.  This AWS Bookstore Demo App is just one example of what you can create using AWS Full-Stack Template. 
+AWS Bookstore Demo App is built on-top of **[AWS Full-Stack Template](https://github.com/awslabs/aws-full-stack-template)**, which provides the foundational services, components, and plumbing needed to get a basic web application up and running. Users can build on top of AWS Full-Stack Template to create any application they envision, whether a travel booking tool, a blog, or another web app.  This AWS Bookstore Demo App is just one example of what you can create using AWS Full-Stack Template. 
 
 Watch the recorded talk and demo [here](https://youtu.be/-pb-DkD6cWg?t=1309). 
 &nbsp;
@@ -81,11 +81,11 @@ Watch the recorded talk and demo [here](https://youtu.be/-pb-DkD6cWg?t=1309).
 
 ### Getting started
 
-To get the AWS Bookstore Demo App up and running in your own AWS account, follow these steps (if you do not have an AWS account, please see [How do I create and activate a new Amazon Web Services account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)):
+To get AWS Bookstore Demo App up and running in your own AWS account, follow these steps (if you do not have an AWS account, please see [How do I create and activate a new Amazon Web Services account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)):
 
 1. Log into the [AWS console](https://console.aws.amazon.com/) if you are not already.  
 *Note: If you are logged in as an IAM user, ensure your account has permissions to create and manage the necessary resources and components for this application.* 
-2. Choose **Launch Stack**  for your desired AWS region to open the AWS CloudFormation console and create a new stack. AWS Bookstore Demo App is supported in the following regions:
+2. Choose one of the **Launch Stack** buttons below for your desired AWS region to open the AWS CloudFormation console and create a new stack. AWS Bookstore Demo App is supported in the following regions:
 
 Region name | Region code | Launch
 --- | --- | ---
@@ -96,13 +96,15 @@ EU (Frankfurt) |	eu-central-1 | [![Launch Stack](https://cdn.rawgit.com/buildkit
 
 3. Continue through the CloudFormation wizard steps
     1. Name your stack, e.g. MyBookstore
-    2. Name your S3 bucket (must be lowercase and has to unique across all existing bucket names in Amazon S3).  See [bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev//BucketRestrictions.html#bucketnamingrules).
+    2. Name your S3 bucket (must be lowercase and has to be unique across all existing bucket names in Amazon S3).  See [bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev//BucketRestrictions.html#bucketnamingrules).
     3. Provide a project name (must be lowercase, letters only, and **under ten characters**).  This is used when naming your resources, e.g. tables, search domain, etc.
     4. After reviewing, check the blue box for creating IAM resources.
 4. Choose **Create stack**.  This will take ~20 minutes to complete.
-5. Sign into your application 
-    1. The output of the CloudFormation stack creation will provide a CloudFront URL (in the *Outputs* section of your stack details page).  Copy and paste the CloudFront URL into your browser.
-    2. You can sign into your application by registering an email address and a password.  Choose **Sign up to explore the demo** to register.  The registration/login experience is run in your AWS account, and the supplied credentials are stored in Amazon Cognito.  *Note: given that this is a demo application, we highly suggest that you do not use an email and password combination that you use for other purposes (such as an AWS account, email, or e-commerce site).*
+5. Once the CloudFormation deployment is complete, check the status of the build in the [CodePipeline](https://console.aws.amazon.com/codesuite/codepipeline/pipelines) console and ensure it has succeeded.
+6. Sign into your application 
+    1. The output of the CloudFormation stack creation will provide a CloudFront URL (in the **Outputs** table of your stack details page).  Click the link or copy and paste the CloudFront URL into your browser.
+    2. You can sign into your application by registering an email address and a password.  Choose **Sign up to explore the demo** to register.  The registration/login experience is run in your AWS account, and the supplied credentials are stored in Amazon Cognito.
+*Note: given that this is a demo application, we highly suggest that you do not use an email and password combination that you use for other purposes (such as an AWS account, email, or e-commerce site).*
     3. Once you provide your credentials, you will receive a verification code at the email address you provided. Upon entering this verification code, you will be signed into the application.
 
 &nbsp;
@@ -145,7 +147,7 @@ To tear down your application and remove all resources associated with AWS Books
 
 **Frontend**
 
-Build artifacts are stored in a S3 bucket where web application assets are maintained (like book cover photos, web graphics, etc.). Amazon CloudFront caches the frontend content from S3, presenting the application to the user via a CloudFront distribution.  The frontend interacts with Amazon Cognito and Amazon API Gateway only.  Amazon Cognito is used for all authentication requests, whereas API Gateway (and Lambda) is used for all API calls interacting across DynamoDB, ElasticSearch, ElastiCache, and Neptune. 
+Build artifacts are stored in a S3 bucket where web application assets are maintained (like book cover photos, web graphics, etc.). Amazon CloudFront caches the frontend content from S3, presenting the application to the user via a CloudFront distribution.  The frontend interacts with Amazon Cognito and Amazon API Gateway only.  Amazon Cognito is used for all authentication requests, whereas API Gateway (and Lambda) is used for all API calls interacting across DynamoDB, Elasticsearch, ElastiCache, and Neptune. 
 
 **Backend**
 
@@ -175,7 +177,7 @@ The code is hosted in AWS CodeCommit. AWS CodePipeline builds the web applicatio
 
 ### Amazon DynamoDB
 
-The backend of the AWS Bookstore Demo App leverages Amazon DynamoDB to enable dynamic scaling and the ability to add features as we rapidly improve our e-commerce application. The application create three tables in DynamoDB: Books, Orders, and Cart.  DynamoDB's primary key consists of a partition (hash) key and an optional sort (range) key. The primary key (partition and sort key together) must be unique.
+The backend of AWS Bookstore Demo App leverages Amazon DynamoDB to enable dynamic scaling and the ability to add features as we rapidly improve our e-commerce application. The application create three tables in DynamoDB: Books, Orders, and Cart.  DynamoDB's primary key consists of a partition (hash) key and an optional sort (range) key. The primary key (partition and sort key together) must be unique.
 
 **Books Table:**
 
@@ -193,7 +195,7 @@ BooksTable {
 
 The table's partition key is the ID attribute of a book. The partition key allows you to look up a book with just the ID. Additionally, there is a global secondary index (GSI) on the category attribute. The GSI allows you to run a query on the category attribute and build the books by category experience. 
 
-For future updates to the application, we plan to return the results of a search/filter by category via ElasticSearch.  Additionally, there is no “description” attribute, as this sample application does not feature pages for individual books.  This may be something users wish to add.
+For future updates to the application, we plan to return the results of a search/filter by category via Elasticsearch.  Additionally, there is no “description” attribute, as this sample application does not feature pages for individual books.  This may be something users wish to add.
 
 &nbsp;
 
@@ -267,7 +269,7 @@ GET /bestsellers (GetBestSellers)
 GET /recommendations (GetRecommendations)  
 GET /recommendations/{bookId} (GetRecommendationsByBook)
 
-**Search (ElasticSearch)**
+**Search (Elasticsearch)**
 
 GET /search (SearchES)
 
@@ -559,10 +561,10 @@ customerId: string
 &nbsp;
 
 **Other Lambda functions**
-There are a few other Lambda functions used to make the AWS Bookstore Demo App work, and they are listed here:
+There are a few other Lambda functions used to make AWS Bookstore Demo App work, and they are listed here:
 
 1. Search - Lambda function that returns a list of books based on provided search parameters in the request.
-2. updateSearchCluster - Lambda function that updates the ElasticSearch cluster when new books are added to the store.
+2. updateSearchCluster - Lambda function that updates the Elasticsearch cluster when new books are added to the store.
 3. updateBestsellers - Updates Leaderboard via the ElastiCache for Redis cluster as orders are placed.
 
 &nbsp;
@@ -571,7 +573,7 @@ There are a few other Lambda functions used to make the AWS Bookstore Demo App w
 
 Amazon ElastiCache for Redis is used to provide the best sellers/leaderboard functionality.  In other words, the books that are the most ordered will be shown dynamically at the top of the best sellers list. 
 
-For the purposes of creating the leaderboard, the AWS Bookstore Demo App utilized [ZINCRBY](https://redis.io/commands/zincrby), which *“Increments the score of member in the sorted set stored at key byincrement. If member does not exist in the sorted set, it is added with increment as its score (as if its previous score was 0.0). If key does not exist, a new sorted set with the specified member as its sole member is created.”*
+For the purposes of creating the leaderboard, AWS Bookstore Demo App utilized [ZINCRBY](https://redis.io/commands/zincrby), which *“Increments the score of member in the sorted set stored at key byincrement. If member does not exist in the sorted set, it is added with increment as its score (as if its previous score was 0.0). If key does not exist, a new sorted set with the specified member as its sole member is created.”*
 
 The information to populate the leaderboard is provided from DynamoDB via DynamoDB Streams.  Whenever an order is placed (and subsequently created in the **Orders** table), this is streamed to Lambda, which updates the cache in ElastiCache for Redis.  The Lambda function used to pass this information is **UpdateBestSellers**. 
 
@@ -583,7 +585,7 @@ Neptune provides a social graph that consists of users, books.  Recommendations 
 
 &nbsp;
 
-### Amazon ElasticSearch
+### Amazon Elasticsearch
 
 Amazon Elasticsearch Service powers the search capability in the bookstore web application, available towards the top of every screen in a search bar.  Users can search by title, author, and category. The template creates a search domain in the Elasticsearch service.
 
@@ -667,13 +669,13 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 ## Running your web application locally
 
 1. If you haven't setup Git credentials for AWS CodeCommit before, head to the IAM Console. If you have already you can skip to step 5. 
-2. Click on your IAM user.
-3. Click on the **Security credentials tab**. Scroll to the bottom and click **Generate** underneath the **HTTPS Git credentials for AWS CodeCommit**.
+2. Choose your IAM user.
+3. Choose the **Security credentials** tab. Scroll to the bottom and choose **Generate** underneath **HTTPS Git credentials for AWS CodeCommit**.
 4. Download and save these credentials. You will use these credentials when cloning your repository. 
 &nbsp;
 
 5. Go to the CodeCommit console and find your code repository.
-5. Click the HTTPS button underneath the **Clone URL** column. 
+5. Choose the HTTPS button underneath the **Clone URL** column. 
 6. Open up your terminal, type `git clone ` paste the Clone URL and hit enter. 
 &nbsp;
 
@@ -681,7 +683,7 @@ Similar to CloudWatch, the capabilities provided by CodeCommit, CodePipeline, an
 8. After all dependencies have been downloaded, run `npm run start`.
 &nbsp;
 
-Your done! Any future updates you make to your repository get pushed to your code pipeline automatically and published to your web application endpoint. 
+You're done! Any future updates you make to your repository will get pushed to your code pipeline automatically and published to your web application endpoint. 
 
 &nbsp;
 
@@ -691,13 +693,13 @@ Your done! Any future updates you make to your repository get pushed to your cod
 
 ## Considerations for demo purposes
 
-1. In order to make the AWS Bookstore Demo App an effective demonstration from the moment it is created, the CloudFormation template kicks off a Lambda function we wrote to pre-load a list of books into the product catalog (the Books table in DynamoDB).  In the same way, we used a Lambda function to pre-load sample friends (into Neptune) and manually populated the list of Best Sellers (on the front page only).  This enables you to sign up as a new user and immediately see what the running store would look like, including recommendations based on what friends have purchased and what the best-selling books section does.  
+1. In order to make AWS Bookstore Demo App an effective demonstration from the moment it is created, the CloudFormation template kicks off a Lambda function we wrote to pre-load a list of books into the product catalog (the Books table in DynamoDB).  In the same way, we used a Lambda function to pre-load sample friends (into Neptune) and manually populated the list of Best Sellers (on the front page only).  This enables you to sign up as a new user and immediately see what the running store would look like, including recommendations based on what friends have purchased and what the best-selling books section does.  
 
 2. You will notice that the Past orders and Best sellers pages are empty at first run.  These are updated as soon as an order is placed. 
 
 3. For the purposes of this demo, we did not include a method to add or remove friends, and decided that every new user will be friends with everyone else (not the most realistic, but effective for this demo).  You are welcome to play around with changing this, adding friend control functionality, or manually editing friendships via the bookstore-friends-edges.csv file.
 
-4. Web assets (pages, images, etc.) are pulled from a public S3 bucket via the CloudFormation template to create the frontend for the AWS Bookstore Demo App.  When building your own web application (or customizing this one), you will likely pull from your own S3 buckets.  If you customize the lambda functions, you will want to store these separately, as well.
+4. Web assets (pages, images, etc.) are pulled from a public S3 bucket via the CloudFormation template to create the frontend for AWS Bookstore Demo App.  When building your own web application (or customizing this one), you will likely pull from your own S3 buckets.  If you customize the lambda functions, you will want to store these separately, as well.
 
 5. Checkout is a simplified demo experience that customers can take and implement a real-world payment processing platform.  Similarly, the *View Receipt* button after purchase is non-functional, meant to demonstrate how you can add on to the app.
 
@@ -727,11 +729,11 @@ Your done! Any future updates you make to your repository get pushed to your cod
 
 ## Additions, forks, and contributions
 
-We are excited that you are interested in using the AWS Bookstore Demo App!  This is a great place to start if you are just beginning with AWS and want to get a functional application up and running.  It is equally useful if you are looking for a sample full-stack application to fork off of and build your own custom application.  We encourage developer participation via contributions and suggested additions.  Of course you are welcome to create your own version!
+We are excited that you are interested in using AWS Bookstore Demo App!  This is a great place to start if you are just beginning with AWS and want to get a functional application up and running.  It is equally useful if you are looking for a sample full-stack application to fork off of and build your own custom application.  We encourage developer participation via contributions and suggested additions.  Of course you are welcome to create your own version!
 
 Please see the [contributing guidelines](CONTRIBUTING.md) for more information.
 
-For a more basic example of a full-stack web application, check out **AWS Full-Stack Template** (available at https://github.com/awslabs/aws-full-stack-template) upon which AWS Bookstore Demo App was built.  As mentioned in the Overview section, AWS Full-Stack Template provides the foundational services, components, and plumbing needed to get a basic web application up and running. Users can build on top of AWS Full-Stack Template to create any application they envision, whether a travel booking tool, a blog, or another web app.  This AWS Bookstore Demo App is just one example of what you can create using AWS Full-Stack Template.
+For a more basic example of a full-stack web application, check out **[AWS Full-Stack Template](https://github.com/awslabs/aws-full-stack-template)** upon which AWS Bookstore Demo App was built.  As mentioned in the Overview section, AWS Full-Stack Template provides the foundational services, components, and plumbing needed to get a basic web application up and running. Users can build on top of AWS Full-Stack Template to create any application they envision, whether a travel booking tool, a blog, or another web app.  This AWS Bookstore Demo App is just one example of what you can create using AWS Full-Stack Template.
 
 &nbsp;
 
@@ -741,4 +743,4 @@ For a more basic example of a full-stack web application, check out **AWS Full-S
 
 ## Questions and contact
 
-For questions on the AWS Bookstore Demo App, or to contact the team, please leave a comment on GitHub.
+For questions on AWS Bookstore Demo App, or to contact the team, please leave a comment on GitHub.
