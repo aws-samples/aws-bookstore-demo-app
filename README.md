@@ -97,7 +97,7 @@ EU (Frankfurt) |	eu-central-1 | [![Launch Stack](https://cdn.rawgit.com/buildkit
 3. Continue through the CloudFormation wizard steps
     1. Name your stack, e.g. MyBookstore
     2. Name your S3 bucket (must be lowercase and has to be unique across all existing bucket names in Amazon S3).  See [bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev//BucketRestrictions.html#bucketnamingrules).
-    3. Provide a project name (must be lowercase, letters only, and **under ten characters**).  This is used when naming your resources, e.g. tables, search domain, etc.
+    3. Provide a project name (must be lowercase, letters only, and **under twelve (12) characters**).  This is used when naming your resources, e.g. tables, search domain, etc.
     4. After reviewing, check the blue box for creating IAM resources.
 4. Choose **Create stack**.  This will take ~20 minutes to complete.
 5. Once the CloudFormation deployment is complete, check the status of the build in the [CodePipeline](https://console.aws.amazon.com/codesuite/codepipeline/pipelines) console and ensure it has succeeded.
