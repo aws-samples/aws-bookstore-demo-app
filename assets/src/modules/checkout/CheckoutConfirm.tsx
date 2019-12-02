@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 import { CategoryNavBar } from "../category/categoryNavBar/CategoryNavBar";
 import { SearchBar } from "../search/searchBar/SearchBar";
 
@@ -7,8 +8,30 @@ import pastOrders from "../../images/pastOrders.png";
 
 import "./checkout.css";
 
-export default class Checkout extends Component {
+interface CheckoutProps { }
+
+interface CheckoutState {
+  toPastOrders: boolean;
+}
+
+export default class Checkout extends Component<CheckoutProps, CheckoutState> {
+  constructor(props: CheckoutProps) {
+    super(props);
+
+    this.state = {
+      toPastOrders: false,
+    };
+  }
+
+  onViewReceipt = () => {
+    this.setState({
+      toPastOrders: true
+    });
+  }
+
   render() {
+    if (this.state.toPastOrders) return <Redirect to='/past' />
+
     return (
       <div>
         <SearchBar />
@@ -21,7 +44,7 @@ export default class Checkout extends Component {
         <div className="well-bs full-page no-padding-bottom no-padding-top">
           <div className="white-box padding-50 no-margin-top col-md-12 no-margin-bottom">
             <h4 className="text-center">Your purchase is complete!</h4>
-            <button className="btn btn-black btn-black-center" type="button" disabled={false}>View Receipt</button>
+            <button className="btn btn-black btn-black-center" type="button" onClick={this.onViewReceipt}>View Receipt</button>
           </div>
           <div className="no-margin-top no-padding">
             <a href="/best"><img src={bestSellers} alt="Best sellers" className="checkout-img no-padding" /></a>
