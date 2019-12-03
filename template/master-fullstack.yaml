@@ -1,497 +1,11 @@
 AWSTemplateFormatVersion: 2010-09-09
-Metadata:
-  AWS::CloudFormation::Designer:
-    07b29683-0ea5-44bf-a439-fcb89713fd09:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 240
-        'y': 150
-      z: 1
-      embeds: []
-    e1a45038-ec76-464d-91b5-6b31bc325fa7:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 160
-        'y': 100
-      z: 1
-      embeds: []
-    57fb3162-6a2d-4651-a9c8-7404e82181e8:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 240
-        'y': 40
-      z: 1
-      embeds: []
-    9de25578-c943-42f5-9ec7-7a5258c7771a:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 310
-        'y': 100
-      z: 1
-      embeds: []
-    9c3f4191-a370-4344-a5b1-626228919c45:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: -180
-        'y': 240
-      z: 1
-      embeds: []
-    e64608f0-5134-4c91-8f3c-4d03408c8236:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 0
-        'y': 230
-      z: 1
-      embeds: []
-    92605ac3-2103-491b-8593-c1ed98181425:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: -100
-        'y': 240
-      z: 1
-      embeds: []
-    8e306d11-6d48-49e0-8f69-760139c83447:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 460
-        'y': 220
-      z: 1
-      embeds: []
-    1ae22cac-5803-4077-a6fe-1a3ca1aedfc2:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 580
-        'y': 240
-      z: 1
-      embeds: []
-    f873825f-3037-47b0-90b4-fca6924fb4e9:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 500
-        'y': 420
-      z: 1
-      embeds: []
-    06a821b7-638e-471c-ab50-51710b73767c:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 240
-        'y': 270
-      z: 1
-      embeds: []
-      isassociatedwith:
-        - f873825f-3037-47b0-90b4-fca6924fb4e9
-    3e7a32d4-9e4d-4ecc-89b2-77203c5d926b:
-      size:
-        width: 1250
-        height: 600
-      position:
-        x: -200
-        'y': 510
-      z: 1
-      embeds:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - 03db03b0-3367-4eb8-bfa1-82df7efc4df4
-        - 278dda65-02c9-49fa-a19c-3dd7afd25683
-    03db03b0-3367-4eb8-bfa1-82df7efc4df4:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 460
-        'y': 1000
-      z: 2
-      parent: 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-      embeds: []
-      iscontainedinside:
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-    9747c416-4f2e-45b1-bc9d-16335256f1db:
-      size:
-        width: 500
-        height: 330
-      position:
-        x: -170
-        'y': 570
-      z: 2
-      parent: 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-      embeds:
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-        - 97efc723-a637-41c7-b712-3af9363a1702
-        - a6392891-b014-4ea9-93a2-831f602268aa
-        - 49458e1d-a6a5-4c44-96b5-f1e3f6c694a8
-        - 3023c794-550d-4066-8a59-c139f4f54616
-        - 6a4462a7-45d0-4bd9-a08a-03cd5621e0ce
-      iscontainedinside:
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-    a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b:
-      size:
-        width: 180
-        height: 120
-      position:
-        x: -140
-        'y': 690
-      z: 3
-      parent: 9747c416-4f2e-45b1-bc9d-16335256f1db
-      embeds:
-        - 0e6ce8f6-0271-439e-afcf-4e4d23c1edc3
-        - acebdfda-9b64-45f8-a888-3d1251bba41a
-      iscontainedinside:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-    cecab4d7-120d-48b2-99d9-1152b429cebc:
-      size:
-        width: 180
-        height: 180
-      position:
-        x: 380
-        'y': 610
-      z: 2
-      parent: 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-      embeds:
-        - e97bf15c-b88b-48b7-b6d8-bffcaa87b24f
-        - 454289ef-fb5c-4a1f-941d-4016ebc9cf24
-        - 9007f88f-407a-4ab7-9ebb-ce6fa13b223e
-      iscontainedinside:
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-    e0ffbcc7-5f62-43ac-b377-47ec80a5a71e:
-      size:
-        width: 390
-        height: 190
-      position:
-        x: 630
-        'y': 590
-      z: 2
-      parent: 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-      embeds:
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-        - f0f16a94-104a-431f-8c87-930f56274955
-        - 5a740957-6b64-4ddd-bd1d-3027df7fc6d5
-      iscontainedinside:
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-    25b4ecc5-9d47-49cb-b5c4-d03574eee62e:
-      size:
-        width: 220
-        height: 120
-      position:
-        x: 630
-        'y': 610
-      z: 3
-      parent: e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-      embeds:
-        - c31e25ac-e338-4d21-9e4b-881a16e0a494
-        - a311ee38-d902-4856-9f09-1d00d1bc8600
-      iscontainedinside:
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-    0e6ce8f6-0271-439e-afcf-4e4d23c1edc3:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: -120
-        'y': 730
-      z: 4
-      parent: a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-      embeds: []
-      iscontainedinside:
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-    97efc723-a637-41c7-b712-3af9363a1702:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 30
-        'y': 820
-      z: 3
-      parent: 9747c416-4f2e-45b1-bc9d-16335256f1db
-      embeds: []
-      iscontainedinside:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-    e97bf15c-b88b-48b7-b6d8-bffcaa87b24f:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 440
-        'y': 710
-      z: 3
-      parent: cecab4d7-120d-48b2-99d9-1152b429cebc
-      embeds: []
-      iscontainedinside:
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-    c31e25ac-e338-4d21-9e4b-881a16e0a494:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 640
-        'y': 650
-      z: 4
-      parent: 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-      embeds: []
-      iscontainedinside:
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-    f0f16a94-104a-431f-8c87-930f56274955:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 860
-        'y': 640
-      z: 3
-      parent: e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-      embeds: []
-      iscontainedinside:
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-    454289ef-fb5c-4a1f-941d-4016ebc9cf24:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 400
-        'y': 630
-      z: 3
-      parent: cecab4d7-120d-48b2-99d9-1152b429cebc
-      embeds: []
-      iscontainedinside:
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    a6392891-b014-4ea9-93a2-831f602268aa:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: -160
-        'y': 830
-      z: 3
-      parent: 9747c416-4f2e-45b1-bc9d-16335256f1db
-      embeds: []
-      iscontainedinside:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    49458e1d-a6a5-4c44-96b5-f1e3f6c694a8:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 240
-        'y': 740
-      z: 3
-      parent: 9747c416-4f2e-45b1-bc9d-16335256f1db
-      embeds: []
-      iscontainedinside:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    3023c794-550d-4066-8a59-c139f4f54616:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 160
-        'y': 740
-      z: 3
-      parent: 9747c416-4f2e-45b1-bc9d-16335256f1db
-      embeds: []
-      iscontainedinside:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    acebdfda-9b64-45f8-a888-3d1251bba41a:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: -40
-        'y': 730
-      z: 4
-      parent: a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-      embeds: []
-      iscontainedinside:
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-        - a79e1eec-10b0-4593-9ea4-9c6b82c0ec8b
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    6a4462a7-45d0-4bd9-a08a-03cd5621e0ce:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 80
-        'y': 740
-      z: 3
-      parent: 9747c416-4f2e-45b1-bc9d-16335256f1db
-      embeds: []
-      iscontainedinside:
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-        - 9747c416-4f2e-45b1-bc9d-16335256f1db
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    5a740957-6b64-4ddd-bd1d-3027df7fc6d5:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 940
-        'y': 640
-      z: 3
-      parent: e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-      embeds: []
-      isassociatedwith:
-        - 03db03b0-3367-4eb8-bfa1-82df7efc4df4
-      iscontainedinside:
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-        - e0ffbcc7-5f62-43ac-b377-47ec80a5a71e
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    a311ee38-d902-4856-9f09-1d00d1bc8600:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 750
-        'y': 650
-      z: 4
-      parent: 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-      embeds: []
-      iscontainedinside:
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-        - 25b4ecc5-9d47-49cb-b5c4-d03574eee62e
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    9007f88f-407a-4ab7-9ebb-ce6fa13b223e:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 490
-        'y': 630
-      z: 3
-      parent: cecab4d7-120d-48b2-99d9-1152b429cebc
-      embeds: []
-      iscontainedinside:
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-        - cecab4d7-120d-48b2-99d9-1152b429cebc
-      dependson:
-        - 06a821b7-638e-471c-ab50-51710b73767c
-    278dda65-02c9-49fa-a19c-3dd7afd25683:
-      size:
-        width: 60
-        height: 60
-      position:
-        x: 340
-        'y': 990
-      z: 2
-      parent: 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-      embeds: []
-      iscontainedinside:
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-        - 3e7a32d4-9e4d-4ecc-89b2-77203c5d926b
-      dependson:
-        - 5a740957-6b64-4ddd-bd1d-3027df7fc6d5
-        - f0f16a94-104a-431f-8c87-930f56274955
-        - a311ee38-d902-4856-9f09-1d00d1bc8600
-        - c31e25ac-e338-4d21-9e4b-881a16e0a494
-        - 9007f88f-407a-4ab7-9ebb-ce6fa13b223e
-        - 454289ef-fb5c-4a1f-941d-4016ebc9cf24
-        - e97bf15c-b88b-48b7-b6d8-bffcaa87b24f
-        - 3023c794-550d-4066-8a59-c139f4f54616
-        - 6a4462a7-45d0-4bd9-a08a-03cd5621e0ce
-        - 49458e1d-a6a5-4c44-96b5-f1e3f6c694a8
-        - a6392891-b014-4ea9-93a2-831f602268aa
-        - 97efc723-a637-41c7-b712-3af9363a1702
-        - acebdfda-9b64-45f8-a888-3d1251bba41a
-        - 0e6ce8f6-0271-439e-afcf-4e4d23c1edc3     
 Parameters:
   ProjectName:
-    Description: Name of the project (lowercase and under ten characters)
+    Description: Used as a prefix for project resources.  Can be up to 12 characters, lowercase letters (a-z) only.
     Type: String
-    AllowedPattern: "^[a-z]{0,10}$"
-    ConstraintDescription: Must be lowercase and under ten characters
-  AssetsBucketName:
-    Type: String
-    Description: Name of assets S3 bucket to create (lowercase, numbers or - only, S3 Buckets are globally unique)
-    AllowedPattern: "^[a-z0-9-]{3,53}$"
-    ConstraintDescription: Must be between 3 and 53 characters (lowercase, numbers or -)
-  SeedRepository:
-    Type: String
-    Default: 'https://s3.amazonaws.com/aws-bookstore-demo/bookstore-webapp.zip'
-
+    Default: mybookstore
+    AllowedPattern: "^[a-z]{1,12}"
+    ConstraintDescription: The ProjectName can be up to 12 characters, lowercase letters (a-z) only.
 Conditions:
   IADRegion: !Equals [!Ref "AWS::Region", "us-east-1"]
 Mappings:
@@ -513,6 +27,8 @@ Mappings:
       NeptuneDataBucket: bookstore-neptune-eu-west-1
       SeederFunctionBucket: fsd-aws-wildrydes-eu-west-1
   Constants:
+    AppKeys:
+      SeedRepository: https://s3.amazonaws.com/aws-bookstore-demo/bookstore-webapp.zip
     S3Keys:
       ListOrdersCode: functions/ListOrders.zip
       GetBookCode: functions/GetBook.zip
@@ -536,6 +52,8 @@ Mappings:
       booksData: data/books.json
       CreateESRoleCode: functions/CreateESRole.zip
       UpdateConfigCode: functions/UpdateConfig.zip
+      PythonLambdaLayer: functions/PythonLambdaLayer.zip
+      DeleteBucketsCode: functions/DeleteBuckets.zip
       SeederFunctionCode: aws-serverless-codecommit-seeder.zip
 Resources:
 # ---------- VPC - SUBNET - SECURITY GROUPS  ---------
@@ -580,14 +98,6 @@ Resources:
           - 1
           - Fn::GetAZs:
               Ref: "AWS::Region"  
-
-  bookstoreSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupName: !Sub '${ProjectName}-SG'
-      GroupDescription: Lock cache down to webserver access only
-      VpcId: !Ref bookstoreVPC
-
   bookstoreVPCRouteTable:  
     Type: AWS::EC2::RouteTable
     Properties: 
@@ -810,6 +320,8 @@ Resources:
                  - NeptuneIAMCode
       Description: 'Lambda function to add an IAM policy to a Neptune cluster to allow for bulk load.'
       Handler: lambda_function.lambda_handler
+      Layers:
+        - !Ref PythonLambdaLayer
       MemorySize: 128
       Role:
         Fn::GetAtt: [ bookstoreNeptuneIAMAttachLambdaRole, Arn ]
@@ -899,7 +411,9 @@ Resources:
       - Ref: bookstoreNeptuneLoaderLambdaRole
   bookstoreNeptuneLoaderLambda:
     Type: AWS::Lambda::Function
-    DependsOn: bookstoreNeptuneDB
+    DependsOn: 
+      - bookstoreNeptuneDB
+      - S3Endpoint
     Properties:
       Code:
         S3Bucket: !FindInMap 
@@ -932,6 +446,8 @@ Resources:
             Fn::GetAtt: [ bookstoreNeptuneLoaderS3ReadRole, Arn]
       Handler: lambda_function.lambda_handler
       MemorySize: 128
+      Layers:
+        - !Ref PythonLambdaLayer
       Role:
         Fn::GetAtt: [ bookstoreNeptuneLoaderLambdaRole, Arn ]
       Runtime: python3.6
@@ -1255,7 +771,22 @@ Resources:
           - bookstoreCacheSecurityGroup
           - 'GroupId'
         
-# ---------- LAMBDA STREAMING FUNCTIONS ---------      
+# ---------- LAMBDA STREAMING FUNCTIONS ---------     
+  PythonLambdaLayer:
+    Type: "AWS::Lambda::LayerVersion"
+    Properties:
+      CompatibleRuntimes:
+        - python3.7
+        - python3.6
+      Content:
+        S3Bucket: !FindInMap
+          - S3Buckets
+          - !Ref 'AWS::Region'
+          - Bucket
+        S3Key: !FindInMap
+          - Constants
+          - S3Keys
+          - PythonLambdaLayer 
   UpdateSearchCluster:
     Type: 'AWS::Lambda::Function'
     DependsOn:
@@ -1716,12 +1247,14 @@ Resources:
       Role: !GetAtt 
         - ESSearchRole
         - Arn
-      Runtime: python2.7
+      Runtime: python3.8
+      Layers:
+        - !Ref PythonLambdaLayer
+
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
           - Fn::GetAtt: [bookstoreVPC, DefaultSecurityGroup]
-       #   - Ref: bookstoreSecurityGroup
         SubnetIds:
           - Ref: bookstoreSubnet1
       Code:
@@ -2968,7 +2501,6 @@ Resources:
   AssetsBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Ref AssetsBucketName
       AccessControl: Private
       MetricsConfigurations:
         - Id: EntireBucket
@@ -2980,12 +2512,12 @@ Resources:
   AssetsBucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
-      Bucket: !Ref AssetsBucketName
+      Bucket: !Ref AssetsBucket
       PolicyDocument:
         Statement:
           - Action: 's3:GetObject'
             Effect: Allow
-            Resource: !Sub 'arn:aws:s3:::${AssetsBucketName}/*'
+            Resource: !Sub 'arn:aws:s3:::${AssetsBucket}/*'
             Principal:
               AWS: !Sub
                 arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity
@@ -2999,7 +2531,7 @@ Resources:
     Type: 'AWS::CloudFront::CloudFrontOriginAccessIdentity'
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: !Sub 'OriginAccessIdentity for ${AssetsBucketName}'
+        Comment: !Sub 'OriginAccessIdentity for ${AssetsBucket}'
     Metadata:
       'AWS::CloudFormation::Designer':
         id: f391801b-d255-40b5-be40-725ad2e93a22
@@ -3010,12 +2542,12 @@ Resources:
     Properties:
       DistributionConfig:
         Enabled: true
-        Comment: !Sub 'CDN for ${AssetsBucketName}'
+        Comment: !Sub 'CDN for ${AssetsBucket}'
         DefaultRootObject: index.html
         Origins:
           - DomainName: !Join
               - ''
-              - - !Sub '${AssetsBucketName}.s3'
+              - - !Sub '${AssetsBucket}.s3'
                 - !If [IADRegion, '', !Sub '-${AWS::Region}']
                 - '.amazonaws.com'
             Id: S3
@@ -3130,7 +2662,6 @@ Resources:
   PipelineArtifactsBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub '${AssetsBucketName}-pipeline'
       AccessControl: Private
     Metadata:
       'AWS::CloudFormation::Designer':
@@ -3171,7 +2702,7 @@ Resources:
             post_build:
               commands:
                 - echo Uploading to AssetsBucket 
-                - aws s3 cp --recursive ./build s3://${AssetsBucketName}/ 
+                - aws s3 cp --recursive ./build s3://${AssetsBucket}/ 
                 - aws s3 cp --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/service-worker.js s3://${AssetsBucket}/
                 - aws s3 cp --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/index.html s3://${AssetsBucket}/
                 - aws cloudfront create-invalidation --distribution-id ${AssetsCDN} --paths /index.html /service-worker.js
@@ -3195,7 +2726,7 @@ Resources:
         - CodePipelineRole
         - Arn
       ArtifactStore:
-        Location: !Sub '${AssetsBucketName}-pipeline'
+        Location: !Ref PipelineArtifactsBucket
         Type: S3
       Stages:
         - Name: Source
@@ -3394,7 +2925,7 @@ Resources:
         'Fn::GetAtt':
           - SeederFunction
           - Arn
-      sourceUrl: !Ref SeedRepository
+      sourceUrl: !FindInMap [Constants, AppKeys, SeedRepository]
       targetRepositoryName: !Sub '${ProjectName}-WebAssets'
       targetRepositoryRegion: '${AWS::Region}'
     Type: 'Custom::RepositorySeeder'
@@ -3410,6 +2941,67 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 63b08124-fccb-4874-ab13-ce6cfe6ce885
+# ---------- CLEANUP STACK ---------
+  BucketCleanupRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: !Sub '${ProjectName}-BucketCleanupRole'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: BucketCleanupPolicy
+          PolicyDocument:
+            Statement:
+              - Action:
+                  - 's3:List*'
+                  - 's3:DeleteObject'
+                Effect: Allow
+                Resource:
+                  - !GetAtt AssetsBucket.Arn
+                  - !GetAtt PipelineArtifactsBucket.Arn
+                  - !Join [ "", [ !GetAtt AssetsBucket.Arn , "/*" ]]
+                  - !Join [ "", [ !GetAtt PipelineArtifactsBucket.Arn , "/*" ]]
+            Version: 2012-10-17
+  BucketCleanupFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: !Sub '${ProjectName}-BucketCleanup'
+      Description: Cleanup S3 buckets when deleting stack
+      Handler: index.handler
+      MemorySize: 256
+      Role: !GetAtt BucketCleanupRole.Arn
+      Runtime: python3.7
+      Timeout: 30
+      Layers:
+        - !Ref PythonLambdaLayer
+      Code:
+        S3Bucket: !FindInMap 
+                    - S3Buckets
+                    - !Ref 'AWS::Region'
+                    - Bucket
+        S3Key: !FindInMap 
+                 - Constants
+                 - S3Keys
+                 - DeleteBucketsCode
+  DeleteBucketsObjects:
+    Type: 'Custom::CustomResource'
+    Properties:
+      ServiceToken: !GetAtt BucketCleanupFunction.Arn
+      BucketNames:
+        - !Ref AssetsBucket
+        - !Ref PipelineArtifactsBucket
+      DependsOn:
+        - BucketCleanupFunction
+        - BucketCleanupRole
 Outputs:
   CodeRepository:
     Description: Code repository for the web application.
