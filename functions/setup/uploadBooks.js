@@ -4,7 +4,6 @@ const https = require("https");
 const url = require("url");
 
 var AWS = require("aws-sdk"),
-uuid = require("uuid"),
 documentClient = new AWS.DynamoDB.DocumentClient(),
 s3Client = new AWS.S3;
 
