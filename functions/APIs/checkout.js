@@ -1,7 +1,6 @@
 "use strict";
 
 const AWS = require("aws-sdk");
-const uuid = require("uuid");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // Checkout - Process a customer's cart into an order
@@ -25,7 +24,7 @@ exports.handler = (event, context, callback) => {
     // - 'books': list of books parsed from request body
     Item: {
       customerId: event.requestContext.identity.cognitoIdentityId,
-      orderId: uuid.v1(),
+      orderId: context.awsRequestId,
       orderDate: Date.now(),
       books: data.books,
     }
