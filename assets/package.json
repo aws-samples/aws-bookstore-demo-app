@@ -12,15 +12,7 @@
     "@types/react-router-bootstrap": "^0.24.5",
     "@types/react-router-dom": "^4.3.1",
     "aws-amplify": "^1.0.10",
-    "bootstrap": "^3.3.7",
-    "react": "^16.5.0",
-    "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.5.0",
-    "react-router-bootstrap": "^0.24.4",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.0.1",
-    "typescript": "^3.2.1"
-  },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
