@@ -11,21 +11,17 @@ Conditions:
 Mappings:
   S3Buckets:
     us-east-1:
-      Bucket: aws-bookstore-demo
+      Bucket: aws-bookstore-demo-app-us-east-1
       NeptuneDataBucket: bookstore-neptune
-      SeederFunctionBucket: fsd-aws-wildrydes-us-east-1
     us-west-2:
-      Bucket: aws-bookstore-demo-us-west-2
+      Bucket: aws-bookstore-demo-app-us-west-2
       NeptuneDataBucket: bookstore-neptune-us-west-2
-      SeederFunctionBucket: fsd-aws-wildrydes-us-west-2
     eu-central-1:
-      Bucket: aws-bookstore-demo-eu-central-1
+      Bucket: aws-bookstore-demo-app-eu-central-1
       NeptuneDataBucket: bookstore-neptune-eu-central-1
-      SeederFunctionBucket: fsd-aws-wildrydes-eu-central-1
     eu-west-1:
-      Bucket: aws-bookstore-demo-eu-west-1
+      Bucket: aws-bookstore-demo-app-eu-west-1
       NeptuneDataBucket: bookstore-neptune-eu-west-1
-      SeederFunctionBucket: fsd-aws-wildrydes-eu-west-1
   Constants:
     AppKeys:
       SeedRepository: https://s3.amazonaws.com/aws-bookstore-demo/bookstore-webapp.zip
@@ -54,7 +50,7 @@ Mappings:
       UpdateConfigCode: functions/UpdateConfig.zip
       PythonLambdaLayer: functions/PythonLambdaLayer.zip
       DeleteBucketsCode: functions/DeleteBuckets.zip
-      SeederFunctionCode: aws-serverless-codecommit-seeder.zip
+      SeederFunctionCode: functions/aws-serverless-codecommit-seeder.zip
 Resources:
 # ---------- VPC - SUBNET - SECURITY GROUPS  ---------
 
@@ -176,7 +172,7 @@ Resources:
     Type: "AWS::Neptune::DBInstance"
     Properties:
       DBClusterIdentifier: !Ref bookstoreNeptuneCluster
-      DBInstanceClass: "db.r4.large"
+      DBInstanceClass: "db.r6g.large"
 
 # ---------- IAM ROLE ATTACH FOR S3 BULK LOAD ------------
 
@@ -325,7 +321,7 @@ Resources:
       MemorySize: 128
       Role:
         Fn::GetAtt: [ bookstoreNeptuneIAMAttachLambdaRole, Arn ]
-      Runtime: python3.6
+      Runtime: python3.9
       Timeout: 30
 
 
@@ -450,7 +446,7 @@ Resources:
         - !Ref PythonLambdaLayer
       Role:
         Fn::GetAtt: [ bookstoreNeptuneLoaderLambdaRole, Arn ]
-      Runtime: python3.6
+      Runtime: python3.9
       Timeout: 180
       VpcConfig:
         SecurityGroupIds:
@@ -776,6 +772,7 @@ Resources:
     Type: "AWS::Lambda::LayerVersion"
     Properties:
       CompatibleRuntimes:
+        - python3.9
         - python3.7
         - python3.6
       Content:
@@ -800,7 +797,7 @@ Resources:
       Role: !GetAtt 
         - ESSearchRole
         - Arn
-      Runtime: python2.7
+      Runtime: python3.9
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -835,7 +832,7 @@ Resources:
       Role: !GetAtt 
         - RedisRole
         - Arn
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -893,7 +890,7 @@ Resources:
       Description: Get list of books ordered by customerId
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -920,7 +917,7 @@ Resources:
       Description: Get book by id
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -947,7 +944,7 @@ Resources:
       Description: Get list of books by category
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -974,7 +971,7 @@ Resources:
       Description: Update Customer's cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1001,7 +998,7 @@ Resources:
       Description: Get item in cart by customer and book id
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1028,7 +1025,7 @@ Resources:
       Description: Get list of items in cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1055,7 +1052,7 @@ Resources:
       Description: Add a book to cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1082,7 +1079,7 @@ Resources:
       Description: Remove a book from cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1109,7 +1106,7 @@ Resources:
       Description: Get list of books ordered by customerId
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1137,7 +1134,7 @@ Resources:
       FunctionName: !Sub '${ProjectName}-UploadBooks'
       Description: Upload sample data for books
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1191,7 +1188,7 @@ Resources:
         'Fn::GetAtt':
           - RecommendationsLambdaRole
           - Arn
-      Runtime: python3.6
+      Runtime: python3.9
       Timeout: 30
       VpcConfig:
         SecurityGroupIds:
@@ -1223,7 +1220,7 @@ Resources:
         'Fn::GetAtt':
           - RecommendationsLambdaRole
           - Arn
-      Runtime: python3.6
+      Runtime: python3.9
       Timeout: 30
       VpcConfig:
         SecurityGroupIds:
@@ -1286,7 +1283,7 @@ Resources:
       Role: !GetAtt
         - RedisRole
         - Arn
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -2691,7 +2688,7 @@ Resources:
           phases:
             install:
               runtime-versions:
-                nodejs: 8
+                nodejs: 10
             pre_build:
               commands:
                 - echo Installing NPM dependencies...
@@ -2769,7 +2766,7 @@ Resources:
         S3Bucket: !FindInMap
           - S3Buckets
           - !Ref 'AWS::Region'
-          - SeederFunctionBucket
+          - Bucket
         S3Key: !FindInMap
          - Constants
          - S3Keys
@@ -2830,7 +2827,7 @@ Resources:
         'Fn::GetAtt':
           - CreateESRole
           - Arn
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 300
     Type: 'AWS::Lambda::Function'
   ESRoleCreator:
@@ -2859,7 +2856,7 @@ Resources:
         'Fn::GetAtt':
           - SeederRole
           - Arn
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 300
       Environment:
         Variables:
@@ -2979,7 +2976,7 @@ Resources:
       Handler: index.handler
       MemorySize: 256
       Role: !GetAtt BucketCleanupRole.Arn
-      Runtime: python3.7
+      Runtime: python3.9
       Timeout: 30
       Layers:
         - !Ref PythonLambdaLayer
