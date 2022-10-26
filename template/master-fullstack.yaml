@@ -46,7 +46,7 @@ Mappings:
       NeptuneIAMCode: functions/NeptuneIAM.zip
       bookstoreNeptuneS3DataPath: /data/
       booksData: data/books.json
-      CreateESRoleCode: functions/CreateESRole.zip
+      CreateOSRoleCode: functions/CreateOSRole.zip
       UpdateConfigCode: functions/UpdateConfig.zip
       PythonLambdaLayer: functions/PythonLambdaLayer.zip
       DeleteBucketsCode: functions/DeleteBuckets.zip
@@ -624,11 +624,11 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Designer':
         id: e1a45038-ec76-464d-91b5-6b31bc325fa7
-# ---------- ELASTICSEARCH ROLES DEFINITIONS ---------        
-  ESSearchRole:
+# ---------- OPENSEARCH ROLES DEFINITIONS ---------        
+  OSSearchRole:
     Type: 'AWS::IAM::Role'
     Properties:
-      RoleName: !Sub '${ProjectName}-ESSearchRole'
+      RoleName: !Sub '${ProjectName}-OSSearchRole'
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -659,7 +659,7 @@ Resources:
                     - !Ref 'AWS::AccountId'
                     - ':'
                     - domain/
-                    - !Ref ElasticsearchDomain
+                    - !Ref OpenSearchDomain
                     - /*
               - Effect: Allow
                 Action:
@@ -689,25 +689,25 @@ Resources:
                         - TBooks
                         - Arn
                       - /stream/*
-  ElasticsearchDomain:
-    Type: 'AWS::Elasticsearch::Domain'
+  OpenSearchDomain:
+    Type: 'AWS::OpenSearchService::Domain'
     DependsOn:
       - ESRoleCreator
     Properties:
       DomainName: !Sub '${ProjectName}-domain'
-      ElasticsearchVersion: 6.2
-      ElasticsearchClusterConfig:
+      EngineVersion: OpenSearch_1.3
+      ClusterConfig:
         DedicatedMasterEnabled: 'false'
-        InstanceCount: '1'
+        InstanceCount: 1
         ZoneAwarenessEnabled: 'false'
-        InstanceType: t2.small.elasticsearch
+        InstanceType: t3.small.search
       VPCOptions:
         SubnetIds:
           - Ref: bookstoreSubnet1
       EBSOptions:
         EBSEnabled: true
         Iops: 0
-        VolumeSize: 10
+        VolumeSize: 100
         VolumeType: gp2
       AccessPolicies:
         Version: 2012-10-17
@@ -787,15 +787,15 @@ Resources:
   UpdateSearchCluster:
     Type: 'AWS::Lambda::Function'
     DependsOn:
-      - ESSearchRole
-      - ElasticsearchDomain
+      - OSSearchRole
+      - OpenSearchDomain
       - TBooks
     Properties:
       FunctionName: !Sub '${ProjectName}-UpdateSearchCluster'
-      Description: 'Update Elasticsearch cluster as books are added'
+      Description: 'Update OpenSearch cluster as books are added'
       Handler: index.handler
       Role: !GetAtt 
-        - ESSearchRole
+        - OSSearchRole
         - Arn
       Runtime: python3.9
       Timeout: '60'
@@ -816,7 +816,7 @@ Resources:
       Environment:
         Variables:
           ESENDPOINT: !GetAtt 
-            - ElasticsearchDomain
+            - OpenSearchDomain
             - DomainEndpoint
           REGION: !Ref 'AWS::Region'
   FunctionUpdateBestSellers:
@@ -1229,12 +1229,12 @@ Resources:
           - Ref: bookstoreSubnet1
           - Ref: bookstoreSubnet2
         
-# ---------- LAMBDA FUNCTIONS for ELASTICSEARCH and ELASTICACHE  ---------          
+# ---------- LAMBDA FUNCTIONS for OPENSEARCH and ELASTICACHE  ---------          
   FunctionSearch:
     Type: 'AWS::Lambda::Function'
     DependsOn:
-      - ESSearchRole
-      - ElasticsearchDomain
+      - OSSearchRole
+      - OpenSearchDomain
       - TBooks
     Properties:
       FunctionName: !Sub '${ProjectName}-Search'
@@ -1242,7 +1242,7 @@ Resources:
       Handler: index.handler
       MemorySize: 256
       Role: !GetAtt 
-        - ESSearchRole
+        - OSSearchRole
         - Arn
       Runtime: python3.8
       Layers:
@@ -1266,7 +1266,7 @@ Resources:
       Environment:
         Variables:
           ESENDPOINT: !GetAtt 
-            - ElasticsearchDomain
+            - OpenSearchDomain
             - DomainEndpoint
           REGION: !Ref 'AWS::Region'
   FunctionGetBestSellers:
@@ -2484,7 +2484,7 @@ Resources:
       DependsOn: 
        - FunctionUploadBooks
        - UpdateSearchCluster
-       - ElasticsearchDomain
+       - OpenSearchDomain
 
 # ------------------------ FRONTEND ------------------------
   AssetsCodeRepository:
@@ -2786,10 +2786,10 @@ Resources:
         id: 6b5081a3-db00-41db-a607-c9d5f98cf394
     DependsOn:
       - AssetsCodeRepository
-  CreateESRole:
+  CreateOSRole:
     Type: 'AWS::IAM::Role'
     Properties:
-      RoleName: !Sub '${ProjectName}-CreateESRole'
+      RoleName: !Sub '${ProjectName}-CreateOSRole'
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -2809,8 +2809,8 @@ Resources:
               - Effect: Allow
                 Action:
                   - 'iam:CreateServiceLinkedRole'
-                Resource: 'arn:aws:iam::*:role/aws-service-role/es.amazonaws.com/AWSServiceRoleForAmazonElasticsearchService'
-  CreateESRoleFunction:
+                Resource: 'arn:aws:iam::*:role/aws-service-role/opensearchservice.amazonaws.com/AWSServiceRoleForAmazonOpenSearchService'
+  CreateOSRoleFunction:
     Properties:
       Code:
         S3Bucket: !FindInMap
@@ -2820,12 +2820,12 @@ Resources:
         S3Key: !FindInMap
           - Constants
           - S3Keys
-          - CreateESRoleCode
-      Description: Create Elasticsearch role
+          - CreateOSRoleCode
+      Description: Create OpenSearch role
       Handler: index.handler
       Role:
         'Fn::GetAtt':
-          - CreateESRole
+          - CreateOSRole
           - Arn
       Runtime: nodejs12.x
       Timeout: 300
@@ -2833,9 +2833,9 @@ Resources:
   ESRoleCreator:
     Type: 'Custom::CustomResource'
     Properties:
-      ServiceToken: !GetAtt CreateESRoleFunction.Arn
+      ServiceToken: !GetAtt CreateOSRoleFunction.Arn
       ParameterOne: Parameter to pass into Custom Lambda Function
-      DependsOn: CreateESRoleFunction
+      DependsOn: CreateOSRoleFunction
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 63b08124-fccb-4874-ab13-ce6cfe6ce885
