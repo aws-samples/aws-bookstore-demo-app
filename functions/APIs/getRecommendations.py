@@ -14,7 +14,7 @@ from gremlin_python.driver.driver_remote_connection import DriverRemoteConnectio
 import os
 import json
 
-myNeptuneEndpoint = "ws://" + os.environ["neptunedb"] + ":8182/gremlin" # Neptune cluster URL
+myNeptuneEndpoint = "wss://" + os.environ["neptunedb"] + ":8182/gremlin" # Neptune cluster URL
 
 # GetRecommendations - Get list of recommended books based on the purchase history of a user's friends
 def handler(event, context):
@@ -23,8 +23,18 @@ def handler(event, context):
     
     g = graph.traversal().withRemote(DriverRemoteConnection(myNeptuneEndpoint,"g"))
     
-    toReturn = g.V().hasLabel("book").where(inE("purchased").count().is_(P.gt(0))).project("bookId","purchases","friendsPurchased") \
-        .by(id()).by(inE("purchased").count()).by(in_().id().fold()).order().by(select("purchases"),Order.decr).limit(5).toList()
+    toReturn = (
+        g.V('us-east-1:09048fa7-0587-4963-a17e-593196775c4a').
+            out('friendOf').aggregate('friends').barrier().
+            out('purchased').dedup().
+            project('bookId','purchases','friendsPurchased').
+                by(id_()).
+                by(in_('purchased').where(P.within('friends')).count()).
+                by(in_('purchased').where(P.within('friends')).id_().fold()).
+            order().by('purchases',Order.desc).
+            limit(5).
+            toList()
+    )
     
     response = {
         "statusCode": 200,
