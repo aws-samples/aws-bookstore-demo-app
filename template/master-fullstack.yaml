@@ -2999,6 +2999,16 @@ Resources:
       DependsOn:
         - BucketCleanupFunction
         - BucketCleanupRole
+
+  BookstoreCognitoDefaultUser:
+    DependsOn: 
+    - UserPool
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: !Join [ "", [ "https://s3." , !Ref "AWS::Region" , ".amazonaws.com/" , !FindInMap [ S3Buckets, !Ref 'AWS::Region', Bucket ] , "/templates/bookstore-cognito-user.yaml" ] ]
+      Parameters:
+        CognitoUserPool: !Ref UserPool
+
 Outputs:
   CodeRepository:
     Description: Code repository for the web application.

@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Custom Resource to Create a New Cognito User"
+Parameters:
+  CognitoUserPool: 
+    Description: "ID of the Cognito User Pool created in the stack."
+    Type: String
+Resources:
+
+  cognitoDefaultUser:
+    DependsOn: 
+      - cognitoDefaultUserLambdaRoleAdminUserCreate
+      - cognitoDefaultUserLambdaRoleCloudWatchStream
+      - cognitoDefaultUserLambdaRoleCloudWatchGroup
+      - cognitoDefaultUserLambdaRole
+    Type: Custom::CognitoDefaultUser
+    Version: '1.0'
+    Properties: 
+      ServiceToken: !GetAtt cognitoDefaultUserLambda.Arn
+
+  cognitoDefaultUserLambdaRoleCloudWatchStream:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+        - Action:
+          - logs:CreateLogStream
+          - logs:PutLogEvents
+          Effect: Allow
+          Resource: !Join [ "", [ "arn:aws:logs:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId" , ":log-group:/aws/lambda/",  !Ref cognitoDefaultUserLambda, ":*" ]]
+        Version: '2012-10-17'
+      PolicyName: cognitoDefaultUserLambdaRoleCloudWatchStream
+      Roles:
+      - Ref: cognitoDefaultUserLambdaRole
+
+  cognitoDefaultUserLambdaRoleCloudWatchGroup:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+        - Action:
+          - logs:CreateLogGroup
+          Effect: Allow
+          Resource: !Join [ "", [ "arn:aws:logs:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId" , ":*" ]]
+        Version: '2012-10-17'
+      PolicyName: cognitoDefaultUserLambdaRoleCloudWatchGroup
+      Roles:
+      - Ref: cognitoDefaultUserLambdaRole
+
+  cognitoDefaultUserLambdaRoleAdminUserCreate:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+        - Action:
+          - cognito-idp:AdminCreateUser
+          - cognito-idp:AdminSetUserPassword
+          Effect: Allow
+          Resource: !Join [ "", [ "arn:aws:cognito-idp:*:", !Ref "AWS::AccountId" , ":userpool/*" ]]
+        Version: '2012-10-17'
+      PolicyName: cognitoDefaultUserLambdaRoleAdminUserCreate
+      Roles:
+      - Ref: cognitoDefaultUserLambdaRole
+
+  cognitoDefaultUserLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+
+  cognitoDefaultUserLambda:    
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import cfnresponse
+          import boto3
+          userpoolid = os.environ['cognitouserpoolid']
+          region = os.environ['region']
+          def lambda_handler(event, context):
+            responseValue = None
+            if event['RequestType'] == 'Create':
+                client = boto3.client('cognito-idp', region_name=region)
+                client.admin_create_user(UserPoolId=userpoolid,Username='user@example.com')
+                responseValue = client.admin_set_user_password(UserPoolId=userpoolid,Username='user@example.com',Password='Password1!',Permanent=True)
+            responseData = {}
+            responseData['Data'] = responseValue
+            print(responseValue)
+            cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, "CustomResourcePhysicalID")
+      Description: 'Lambda function to add an Cognito user to the user pool created in the bookstore stack.'
+      Handler: index.lambda_handler
+      Environment: 
+        Variables:
+          cognitouserpoolid: !Ref CognitoUserPool
+          region: !Ref 'AWS::Region'
+      MemorySize: 128
+      Role: !GetAtt cognitoDefaultUserLambdaRole.Arn
+      Runtime: python3.9
+      Timeout: 30
