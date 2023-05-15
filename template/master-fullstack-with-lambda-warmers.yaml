@@ -357,6 +357,8 @@ Resources:
       - bookstoreNeptuneLoaderLambda
       - bookstoreNeptuneLoaderS3ReadPolicy
       - bookstoreNeptuneLoaderS3ReadRole
+      - bookstoreVPCRouteTableAssociation
+      - bookstoreVPCRouteTableAssociationTwo
       - S3Endpoint
     Type: "Custom::NeptuneLoader"
     Properties: 
