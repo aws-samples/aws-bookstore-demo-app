@@ -832,7 +832,7 @@ Resources:
       Role: !GetAtt 
         - RedisRole
         - Arn
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -890,7 +890,7 @@ Resources:
       Description: Get list of books ordered by customerId
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -917,7 +917,7 @@ Resources:
       Description: Get book by id
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -944,7 +944,7 @@ Resources:
       Description: Get list of books by category
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -971,7 +971,7 @@ Resources:
       Description: Update Customer's cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -998,7 +998,7 @@ Resources:
       Description: Get item in cart by customer and book id
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1025,7 +1025,7 @@ Resources:
       Description: Get list of items in cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1052,7 +1052,7 @@ Resources:
       Description: Add a book to cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1079,7 +1079,7 @@ Resources:
       Description: Remove a book from cart
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1106,7 +1106,7 @@ Resources:
       Description: Get list of books ordered by customerId
       Handler: index.handler
       MemorySize: 256
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1134,7 +1134,7 @@ Resources:
       FunctionName: !Sub '${ProjectName}-UploadBooks'
       Description: Upload sample data for books
       Handler: index.handler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Role: !GetAtt 
         - DynamoDbRole
         - Arn
@@ -1283,7 +1283,7 @@ Resources:
       Role: !GetAtt
         - RedisRole
         - Arn
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Timeout: '60'
       VpcConfig:
         SecurityGroupIds:
@@ -2827,7 +2827,7 @@ Resources:
         'Fn::GetAtt':
           - CreateOSRole
           - Arn
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Timeout: 300
     Type: 'AWS::Lambda::Function'
   ESRoleCreator:
@@ -2856,7 +2856,7 @@ Resources:
         'Fn::GetAtt':
           - SeederRole
           - Arn
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Timeout: 300
       Environment:
         Variables:
