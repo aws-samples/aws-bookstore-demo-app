@@ -165,6 +165,7 @@ Resources:
     Type: "AWS::Neptune::DBCluster"
     Properties:
       IamAuthEnabled : false
+      StorageEncrypted: true
       DBSubnetGroupName:
         Ref: bookstoreNeptuneSubnetGroup
       VpcSecurityGroupIds: [ !GetAtt bookstoreNeptuneSecurityGroup.GroupId ]
